@@ -1,0 +1,51 @@
+globalThis.__BUILD_MANIFEST = {
+  "pages": {
+    "/_app": [
+      "static/chunks/42a73_next_dist_compiled_a0e69058._.js",
+      "static/chunks/42a73_next_dist_shared_lib_e83616f8._.js",
+      "static/chunks/42a73_next_dist_client_d1bd9eab._.js",
+      "static/chunks/42a73_next_dist_cd4e5da7._.js",
+      "static/chunks/42a73_next_app_92e6b6d7.js",
+      "static/chunks/[next]_entry_page-loader_ts_056a18c3._.js",
+      "static/chunks/42a73_react-dom_296898d1._.js",
+      "static/chunks/42a73_a13f9cb1._.js",
+      "static/chunks/[root-of-the-server]__e78ee910._.js",
+      "static/chunks/_gemini_antigravity_scratch_SiCa_pages__app_2da965e7._.js",
+      "static/chunks/turbopack-_gemini_antigravity_scratch_SiCa_pages__app_937f6ba9._.js"
+    ],
+    "/_error": [
+      "static/chunks/42a73_next_dist_compiled_a0e69058._.js",
+      "static/chunks/42a73_next_dist_shared_lib_8a870c8b._.js",
+      "static/chunks/42a73_next_dist_client_d1bd9eab._.js",
+      "static/chunks/42a73_next_dist_cb47037e._.js",
+      "static/chunks/42a73_next_error_d74d29d4.js",
+      "static/chunks/[next]_entry_page-loader_ts_46765368._.js",
+      "static/chunks/42a73_react-dom_296898d1._.js",
+      "static/chunks/42a73_a13f9cb1._.js",
+      "static/chunks/[root-of-the-server]__7ec0ac5d._.js",
+      "static/chunks/_gemini_antigravity_scratch_SiCa_pages__error_2da965e7._.js",
+      "static/chunks/turbopack-_gemini_antigravity_scratch_SiCa_pages__error_82774cd0._.js"
+    ]
+  },
+  "devFiles": [],
+  "polyfillFiles": [
+    "static/chunks/42a73_next_dist_build_polyfills_polyfill-nomodule.js"
+  ],
+  "lowPriorityFiles": [],
+  "rootMainFiles": [
+    "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_0afb29b9._.js",
+    "static/chunks/42a73_next_dist_compiled_react-dom_ea76e4d4._.js",
+    "static/chunks/42a73_next_dist_compiled_react-server-dom-turbopack_b0f09d80._.js",
+    "static/chunks/42a73_next_dist_compiled_next-devtools_index_8c6f95c5.js",
+    "static/chunks/42a73_next_dist_compiled_15961af2._.js",
+    "static/chunks/42a73_next_dist_client_16013049._.js",
+    "static/chunks/42a73_next_dist_8b36c2a3._.js",
+    "static/chunks/42a73_@swc_helpers_cjs_4ee7fa49._.js",
+    "static/chunks/_gemini_antigravity_scratch_SiCa_a0ff3932._.js",
+    "static/chunks/turbopack-_gemini_antigravity_scratch_SiCa_46b32ab5._.js"
+  ]
+};
+globalThis.__BUILD_MANIFEST.lowPriorityFiles = [
+"/static/" + process.env.__NEXT_BUILD_ID + "/_buildManifest.js",
+"/static/" + process.env.__NEXT_BUILD_ID + "/_ssgManifest.js"
+];

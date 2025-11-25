@@ -1,0 +1,12 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/admin/login/page": "/admin/login",
+  "/admin/page": "/admin",
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/api/guests/route": "/api/guests",
+  "/api/rsvp/route": "/api/rsvp",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/rsvp/page": "/rsvp"
+}

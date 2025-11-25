@@ -1,0 +1,36 @@
+{
+  "node": {
+    "008206bc7e672e7fcab0c5aa3ab4cb77f450d3a13a": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": 16059,
+          "async": false,
+          "exportedName": "logout",
+          "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/page": "action-browser"
+      },
+      "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts",
+      "exportedName": "logout"
+    },
+    "6044c74c0e669d4d78d990b61700d0e0bf0dcd3558": {
+      "workers": {
+        "app/admin/login/page": {
+          "moduleId": 29097,
+          "async": false,
+          "exportedName": "authenticate",
+          "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/login/page": "action-browser"
+      },
+      "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts",
+      "exportedName": "authenticate"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "M2llgNkb5Uv2HVYKCPbiIDw/tGucPU2Oe0pHP79wCxM="
+}

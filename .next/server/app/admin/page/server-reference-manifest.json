@@ -1,0 +1,20 @@
+{
+  "node": {
+    "008206bc7e672e7fcab0c5aa3ab4cb77f450d3a13a": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": 16059,
+          "async": false,
+          "exportedName": "logout",
+          "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+    }
+  },
+  "edge": {}
+}

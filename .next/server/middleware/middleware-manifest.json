@@ -1,0 +1,31 @@
+{
+  "sorted_middleware": [],
+  "middleware": {
+    "/": {
+      "files": [
+        "server/edge/chunks/_gemini_antigravity_scratch_SiCa_edge-wrapper_eb6d6edd.js",
+        "server/edge/chunks/[root-of-the-server]__463bf726._.js",
+        "server/edge/chunks/turbopack-_gemini_antigravity_scratch_SiCa_edge-wrapper_e2efebc3.js"
+      ],
+      "name": "middleware",
+      "page": "/",
+      "matchers": [
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/((?!api|_next/static|_next/image|.*\\.png$).*){(\\\\.json)}?",
+          "originalSource": "/((?!api|_next/static|_next/image|.*\\.png$).*)"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "eXfGbRMrapC1rTwRXe7L7",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "M2llgNkb5Uv2HVYKCPbiIDw/tGucPU2Oe0pHP79wCxM=",
+        "__NEXT_PREVIEW_MODE_ID": "52ba61066e267a4a76ed9ba076ee7d32",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "b7bcfb36306a585fb6c406ef2df7612b2afec7f6b5e5ca4a75f347f0cbf1e4df",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "c75e8321cd546fd7b7bdf22f57484369f5d055e63fbf597f2055f77d4f345368"
+      }
+    }
+  },
+  "instrumentation": null,
+  "functions": {}
+}

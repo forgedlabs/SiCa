@@ -1,0 +1,3 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["chunks/_gemini_antigravity_scratch_SiCa_edge-wrapper_eb6d6edd.js",86322,(e,t,h)=>{self._ENTRIES||={};let n=Promise.resolve().then(()=>e.i(63512));n.catch(()=>{}),self._ENTRIES.middleware_middleware=new Proxy(n,{get(e,t){if("then"===t)return(t,h)=>e.then(t,h);let h=(...h)=>e.then(e=>(0,e[t])(...h));return h.then=(h,n)=>e.then(e=>e[t]).then(h,n),h}})}]);
+
+//# sourceMappingURL=_gemini_antigravity_scratch_SiCa_edge-wrapper_eb6d6edd.js.map
