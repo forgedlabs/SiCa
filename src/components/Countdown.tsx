@@ -31,22 +31,22 @@ export default function Countdown() {
     }, [])
 
     return (
-        <div className="flex gap-8 text-center justify-center mb-12 font-serif text-[#333]">
+        <div className="flex gap-4 md:gap-8 text-center justify-center mb-12 font-serif text-[#333]">
             <div>
-                <div className="text-4xl md:text-5xl mb-2">{timeLeft.days}</div>
-                <div className="text-xs uppercase tracking-widest text-gray-400">Days</div>
+                <div className="text-3xl md:text-5xl mb-2">{timeLeft.days}</div>
+                <div className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Days</div>
             </div>
             <div>
-                <div className="text-4xl md:text-5xl mb-2">{timeLeft.hours}</div>
-                <div className="text-xs uppercase tracking-widest text-gray-400">Hours</div>
+                <div className="text-3xl md:text-5xl mb-2">{timeLeft.hours}</div>
+                <div className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Hours</div>
             </div>
             <div>
-                <div className="text-4xl md:text-5xl mb-2">{timeLeft.minutes}</div>
-                <div className="text-xs uppercase tracking-widest text-gray-400">Mins</div>
+                <div className="text-3xl md:text-5xl mb-2">{timeLeft.minutes}</div>
+                <div className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Mins</div>
             </div>
             <div>
-                <div className="text-4xl md:text-5xl mb-2">{timeLeft.seconds}</div>
-                <div className="text-xs uppercase tracking-widest text-gray-400">Secs</div>
+                <div className="text-3xl md:text-5xl mb-2">{timeLeft.seconds}</div>
+                <div className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Secs</div>
             </div>
         </div>
     )

@@ -550,25 +550,98 @@ function RSVPPage() {
         firstName: "",
         lastName: "",
         email: "",
+        phone: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        guestRelationship: "",
         attending: "yes",
         meal: "",
         dietary: "",
         plusOne: false
     });
+    const [errors, setErrors] = (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({});
+    const validateStep = (currentStep)=>{
+        const newErrors = {};
+        let isValid = true;
+        if (currentStep === 1) {
+            const nameRegex = /^[a-zA-Z\s\-\']+$/;
+            if (!formData.firstName.trim()) {
+                newErrors.firstName = "First name is required";
+            } else if (!nameRegex.test(formData.firstName)) {
+                newErrors.firstName = "Name can only contain letters, spaces, hyphens and apostrophes";
+            }
+            if (!formData.lastName.trim()) {
+                newErrors.lastName = "Last name is required";
+            } else if (!nameRegex.test(formData.lastName)) {
+                newErrors.lastName = "Name can only contain letters, spaces, hyphens and apostrophes";
+            }
+            if (!formData.email.trim()) {
+                newErrors.email = "Email is required";
+            } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+                newErrors.email = "Email is invalid";
+            }
+        }
+        if (currentStep === 2) {
+            const phoneRegex = /^[\d\+\-\s\(\)]+$/;
+            if (!formData.phone.trim()) {
+                newErrors.phone = "Phone number is required";
+            } else if (!phoneRegex.test(formData.phone)) {
+                newErrors.phone = "Phone can only contain numbers and standard symbols (+, -, (), space)";
+            } else if (formData.phone.replace(/\D/g, '').length < 7) {
+                newErrors.phone = "Phone number is too short";
+            }
+            if (!formData.address.trim()) newErrors.address = "Address is required";
+            if (!formData.city.trim()) newErrors.city = "City is required";
+            if (!formData.state.trim()) newErrors.state = "State is required";
+            if (!formData.zip.trim()) {
+                newErrors.zip = "Postal code is required";
+            } else if (formData.zip.trim().length < 4) {
+                newErrors.zip = "Postal code is too short";
+            }
+        }
+        if (currentStep === 3) {
+            if (!formData.guestRelationship) newErrors.guestRelationship = "Please select your relationship";
+        }
+        if (currentStep === 4) {
+            if (!formData.attending) newErrors.attending = "Please select an option";
+        }
+        if (currentStep === 5 && formData.attending === 'yes') {
+            if (!formData.meal) newErrors.meal = "Please select a ceremony option";
+        }
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            isValid = false;
+        } else {
+            setErrors({});
+        }
+        return isValid;
+    };
     const handleChange = (e)=>{
         const { name, value } = e.target;
         setFormData((prev)=>({
                 ...prev,
                 [name]: value
             }));
+        if (errors[name]) {
+            setErrors((prev_0)=>({
+                    ...prev_0,
+                    [name]: ""
+                }));
+        }
     };
     const handleNext = ()=>{
-        setStep((prev_0)=>prev_0 + 1);
+        if (validateStep(step)) {
+            setStep((prev_1)=>prev_1 + 1);
+        }
     };
     const handleBack = ()=>{
-        setStep((prev_1)=>prev_1 - 1);
+        setStep((prev_2)=>prev_2 - 1);
+        setErrors({});
     };
     const handleSubmit = async ()=>{
+        if (!validateStep(step)) return;
         setLoading(true);
         try {
             // 1. Create Guest
@@ -580,7 +653,13 @@ function RSVPPage() {
                 body: JSON.stringify({
                     firstName: formData.firstName,
                     lastName: formData.lastName,
-                    email: formData.email
+                    email: formData.email,
+                    phone: formData.phone,
+                    address: formData.address,
+                    city: formData.city,
+                    state: formData.state,
+                    zip: formData.zip,
+                    guestRelationship: formData.guestRelationship
                 })
             });
             if (!guestRes.ok) throw new Error('Failed to create guest');
@@ -599,7 +678,7 @@ function RSVPPage() {
                 })
             });
             if (!rsvpRes.ok) throw new Error('Failed to submit RSVP');
-            setStep(4); // Success step
+            setStep(6); // Success step
         } catch (error) {
             console.error(error);
             alert('Something went wrong. Please try again.');
@@ -625,12 +704,12 @@ function RSVPPage() {
                                 className: "mx-auto"
                             }, void 0, false, {
                                 fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                lineNumber: 85,
+                                lineNumber: 164,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                            lineNumber: 84,
+                            lineNumber: 163,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -638,7 +717,7 @@ function RSVPPage() {
                             children: "RSVP"
                         }, void 0, false, {
                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                            lineNumber: 87,
+                            lineNumber: 166,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -646,13 +725,13 @@ function RSVPPage() {
                             children: "Simon & Catherine • May 30, 2026"
                         }, void 0, false, {
                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                            lineNumber: 88,
+                            lineNumber: 167,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                    lineNumber: 83,
+                    lineNumber: 162,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -673,7 +752,7 @@ function RSVPPage() {
                                                     children: "First Name"
                                                 }, void 0, false, {
                                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                    lineNumber: 95,
+                                                    lineNumber: 174,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -685,13 +764,21 @@ function RSVPPage() {
                                                     className: "border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
                                                 }, void 0, false, {
                                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                    lineNumber: 96,
+                                                    lineNumber: 175,
                                                     columnNumber: 37
+                                                }, this),
+                                                errors.firstName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    className: "text-red-500 text-xs mt-1",
+                                                    children: errors.firstName
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 176,
+                                                    columnNumber: 58
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 94,
+                                            lineNumber: 173,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -703,7 +790,7 @@ function RSVPPage() {
                                                     children: "Last Name"
                                                 }, void 0, false, {
                                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                    lineNumber: 99,
+                                                    lineNumber: 179,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -715,19 +802,27 @@ function RSVPPage() {
                                                     className: "border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
                                                 }, void 0, false, {
                                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                    lineNumber: 100,
+                                                    lineNumber: 180,
                                                     columnNumber: 37
+                                                }, this),
+                                                errors.lastName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    className: "text-red-500 text-xs mt-1",
+                                                    children: errors.lastName
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 181,
+                                                    columnNumber: 57
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 98,
+                                            lineNumber: 178,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 93,
+                                    lineNumber: 172,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -739,7 +834,7 @@ function RSVPPage() {
                                             children: "Email Address"
                                         }, void 0, false, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 104,
+                                            lineNumber: 185,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -752,22 +847,372 @@ function RSVPPage() {
                                             className: "border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
                                         }, void 0, false, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 105,
+                                            lineNumber: 186,
                                             columnNumber: 33
+                                        }, this),
+                                        errors.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-red-500 text-xs mt-1",
+                                            children: errors.email
+                                        }, void 0, false, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 187,
+                                            columnNumber: 50
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 103,
+                                    lineNumber: 184,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                            lineNumber: 92,
+                            lineNumber: 171,
                             columnNumber: 36
                         }, this),
                         step === 2 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "space-y-8 animate-in fade-in slide-in-from-bottom-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "space-y-2",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                            htmlFor: "phone",
+                                            className: "uppercase text-xs tracking-widest text-gray-500",
+                                            children: "Phone Number"
+                                        }, void 0, false, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 193,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                            id: "phone",
+                                            name: "phone",
+                                            type: "tel",
+                                            value: formData.phone,
+                                            onChange: handleChange,
+                                            placeholder: "+31 6 1234 5678",
+                                            className: "border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
+                                        }, void 0, false, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 194,
+                                            columnNumber: 33
+                                        }, this),
+                                        errors.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-red-500 text-xs mt-1",
+                                            children: errors.phone
+                                        }, void 0, false, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 195,
+                                            columnNumber: 50
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                    lineNumber: 192,
+                                    columnNumber: 29
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "space-y-2",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                            htmlFor: "address",
+                                            className: "uppercase text-xs tracking-widest text-gray-500",
+                                            children: "Street Address"
+                                        }, void 0, false, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 198,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                            id: "address",
+                                            name: "address",
+                                            value: formData.address,
+                                            onChange: handleChange,
+                                            placeholder: "123 Main Street",
+                                            className: "border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
+                                        }, void 0, false, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 199,
+                                            columnNumber: 33
+                                        }, this),
+                                        errors.address && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-red-500 text-xs mt-1",
+                                            children: errors.address
+                                        }, void 0, false, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 200,
+                                            columnNumber: 52
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                    lineNumber: 197,
+                                    columnNumber: 29
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "grid grid-cols-3 gap-8",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "space-y-2",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                    htmlFor: "city",
+                                                    className: "uppercase text-xs tracking-widest text-gray-500",
+                                                    children: "City"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 204,
+                                                    columnNumber: 37
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                    id: "city",
+                                                    name: "city",
+                                                    value: formData.city,
+                                                    onChange: handleChange,
+                                                    placeholder: "Amsterdam",
+                                                    className: "border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 205,
+                                                    columnNumber: 37
+                                                }, this),
+                                                errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    className: "text-red-500 text-xs mt-1",
+                                                    children: errors.city
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 206,
+                                                    columnNumber: 53
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 203,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "space-y-2",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                    htmlFor: "state",
+                                                    className: "uppercase text-xs tracking-widest text-gray-500",
+                                                    children: "State/Province"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 209,
+                                                    columnNumber: 37
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                    id: "state",
+                                                    name: "state",
+                                                    value: formData.state,
+                                                    onChange: handleChange,
+                                                    placeholder: "NH",
+                                                    className: "border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 210,
+                                                    columnNumber: 37
+                                                }, this),
+                                                errors.state && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    className: "text-red-500 text-xs mt-1",
+                                                    children: errors.state
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 211,
+                                                    columnNumber: 54
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 208,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "space-y-2",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                    htmlFor: "zip",
+                                                    className: "uppercase text-xs tracking-widest text-gray-500",
+                                                    children: "Postal Code"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 214,
+                                                    columnNumber: 37
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                    id: "zip",
+                                                    name: "zip",
+                                                    value: formData.zip,
+                                                    onChange: handleChange,
+                                                    placeholder: "1012 AB",
+                                                    className: "border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 215,
+                                                    columnNumber: 37
+                                                }, this),
+                                                errors.zip && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    className: "text-red-500 text-xs mt-1",
+                                                    children: errors.zip
+                                                }, void 0, false, {
+                                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                    lineNumber: 216,
+                                                    columnNumber: 52
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 213,
+                                            columnNumber: 33
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                    lineNumber: 202,
+                                    columnNumber: 29
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                            lineNumber: 191,
+                            columnNumber: 36
+                        }, this),
+                        step === 3 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "space-y-8 animate-in fade-in slide-in-from-bottom-4",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "space-y-4",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                        className: "uppercase text-xs tracking-widest text-gray-500",
+                                        children: "Guest Relationship"
+                                    }, void 0, false, {
+                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                        lineNumber: 223,
+                                        columnNumber: 33
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$radio$2d$group$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RadioGroup"], {
+                                        value: formData.guestRelationship,
+                                        onValueChange: (val)=>{
+                                            setFormData((prev_3)=>({
+                                                    ...prev_3,
+                                                    guestRelationship: val
+                                                }));
+                                            if (errors.guestRelationship) setErrors((prev_4)=>({
+                                                    ...prev_4,
+                                                    guestRelationship: ""
+                                                }));
+                                        },
+                                        className: "space-y-4",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex items-center space-x-3",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$radio$2d$group$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RadioGroupItem"], {
+                                                        value: "GROOM",
+                                                        id: "g1",
+                                                        className: "border-gray-300 text-black"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                        lineNumber: 235,
+                                                        columnNumber: 41
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                        htmlFor: "g1",
+                                                        className: "font-serif text-xl cursor-pointer",
+                                                        children: "Guest of the Groom"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                        lineNumber: 236,
+                                                        columnNumber: 41
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                lineNumber: 234,
+                                                columnNumber: 37
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex items-center space-x-3",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$radio$2d$group$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RadioGroupItem"], {
+                                                        value: "BRIDE",
+                                                        id: "g2",
+                                                        className: "border-gray-300 text-black"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                        lineNumber: 239,
+                                                        columnNumber: 41
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                        htmlFor: "g2",
+                                                        className: "font-serif text-xl cursor-pointer",
+                                                        children: "Guest of the Bride"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                        lineNumber: 240,
+                                                        columnNumber: 41
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                lineNumber: 238,
+                                                columnNumber: 37
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex items-center space-x-3",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$radio$2d$group$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RadioGroupItem"], {
+                                                        value: "BOTH",
+                                                        id: "g3",
+                                                        className: "border-gray-300 text-black"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                        lineNumber: 243,
+                                                        columnNumber: 41
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                        htmlFor: "g3",
+                                                        className: "font-serif text-xl cursor-pointer",
+                                                        children: "Guest of Both"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                        lineNumber: 244,
+                                                        columnNumber: 41
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                                lineNumber: 242,
+                                                columnNumber: 37
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                        lineNumber: 224,
+                                        columnNumber: 33
+                                    }, this),
+                                    errors.guestRelationship && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-red-500 text-xs mt-1",
+                                        children: errors.guestRelationship
+                                    }, void 0, false, {
+                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                        lineNumber: 247,
+                                        columnNumber: 62
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                lineNumber: 222,
+                                columnNumber: 29
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                            lineNumber: 221,
+                            columnNumber: 36
+                        }, this),
+                        step === 4 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "space-y-8 animate-in fade-in slide-in-from-bottom-4",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "space-y-4",
@@ -777,15 +1222,21 @@ function RSVPPage() {
                                         children: "Will you be attending?"
                                     }, void 0, false, {
                                         fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                        lineNumber: 111,
+                                        lineNumber: 253,
                                         columnNumber: 33
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$radio$2d$group$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RadioGroup"], {
                                         value: formData.attending,
-                                        onValueChange: (val)=>setFormData((prev_2)=>({
-                                                    ...prev_2,
-                                                    attending: val
-                                                })),
+                                        onValueChange: (val_0)=>{
+                                            setFormData((prev_5)=>({
+                                                    ...prev_5,
+                                                    attending: val_0
+                                                }));
+                                            if (errors.attending) setErrors((prev_6)=>({
+                                                    ...prev_6,
+                                                    attending: ""
+                                                }));
+                                        },
                                         className: "space-y-4",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -797,7 +1248,7 @@ function RSVPPage() {
                                                         className: "border-gray-300 text-black"
                                                     }, void 0, false, {
                                                         fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                        lineNumber: 117,
+                                                        lineNumber: 265,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -806,13 +1257,13 @@ function RSVPPage() {
                                                         children: "Joyfully Accept"
                                                     }, void 0, false, {
                                                         fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                        lineNumber: 118,
+                                                        lineNumber: 266,
                                                         columnNumber: 41
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                lineNumber: 116,
+                                                lineNumber: 264,
                                                 columnNumber: 37
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -824,7 +1275,7 @@ function RSVPPage() {
                                                         className: "border-gray-300 text-black"
                                                     }, void 0, false, {
                                                         fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                        lineNumber: 121,
+                                                        lineNumber: 269,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -833,33 +1284,41 @@ function RSVPPage() {
                                                         children: "Regretfully Decline"
                                                     }, void 0, false, {
                                                         fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                        lineNumber: 122,
+                                                        lineNumber: 270,
                                                         columnNumber: 41
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                lineNumber: 120,
+                                                lineNumber: 268,
                                                 columnNumber: 37
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                        lineNumber: 112,
+                                        lineNumber: 254,
                                         columnNumber: 33
+                                    }, this),
+                                    errors.attending && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-red-500 text-xs mt-1",
+                                        children: errors.attending
+                                    }, void 0, false, {
+                                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                        lineNumber: 273,
+                                        columnNumber: 54
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                lineNumber: 110,
+                                lineNumber: 252,
                                 columnNumber: 29
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                            lineNumber: 109,
+                            lineNumber: 251,
                             columnNumber: 36
                         }, this),
-                        step === 3 && formData.attending === 'yes' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        step === 5 && formData.attending === 'yes' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "space-y-8 animate-in fade-in slide-in-from-bottom-4",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -870,15 +1329,21 @@ function RSVPPage() {
                                             children: "Which ceremonies will you attend?"
                                         }, void 0, false, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 130,
+                                            lineNumber: 279,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$radio$2d$group$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RadioGroup"], {
                                             value: formData.meal,
-                                            onValueChange: (val_0)=>setFormData((prev_3)=>({
-                                                        ...prev_3,
-                                                        meal: val_0
-                                                    })),
+                                            onValueChange: (val_1)=>{
+                                                setFormData((prev_7)=>({
+                                                        ...prev_7,
+                                                        meal: val_1
+                                                    }));
+                                                if (errors.meal) setErrors((prev_8)=>({
+                                                        ...prev_8,
+                                                        meal: ""
+                                                    }));
+                                            },
                                             className: "space-y-4",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -890,7 +1355,7 @@ function RSVPPage() {
                                                             className: "border-gray-300 text-black"
                                                         }, void 0, false, {
                                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                            lineNumber: 136,
+                                                            lineNumber: 291,
                                                             columnNumber: 41
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -899,13 +1364,13 @@ function RSVPPage() {
                                                             children: "Both Ceremonies"
                                                         }, void 0, false, {
                                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                            lineNumber: 137,
+                                                            lineNumber: 292,
                                                             columnNumber: 41
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                    lineNumber: 135,
+                                                    lineNumber: 290,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -917,7 +1382,7 @@ function RSVPPage() {
                                                             className: "border-gray-300 text-black"
                                                         }, void 0, false, {
                                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                            lineNumber: 140,
+                                                            lineNumber: 295,
                                                             columnNumber: 41
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -926,13 +1391,13 @@ function RSVPPage() {
                                                             children: "Traditional Ceremony Only"
                                                         }, void 0, false, {
                                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                            lineNumber: 141,
+                                                            lineNumber: 296,
                                                             columnNumber: 41
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                    lineNumber: 139,
+                                                    lineNumber: 294,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -944,7 +1409,7 @@ function RSVPPage() {
                                                             className: "border-gray-300 text-black"
                                                         }, void 0, false, {
                                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                            lineNumber: 144,
+                                                            lineNumber: 299,
                                                             columnNumber: 41
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -953,25 +1418,33 @@ function RSVPPage() {
                                                             children: "Ceremonial Exchange & Reception Only"
                                                         }, void 0, false, {
                                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                            lineNumber: 145,
+                                                            lineNumber: 300,
                                                             columnNumber: 41
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                    lineNumber: 143,
+                                                    lineNumber: 298,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 131,
+                                            lineNumber: 280,
                                             columnNumber: 33
+                                        }, this),
+                                        errors.meal && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-red-500 text-xs mt-1",
+                                            children: errors.meal
+                                        }, void 0, false, {
+                                            fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
+                                            lineNumber: 303,
+                                            columnNumber: 49
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 129,
+                                    lineNumber: 278,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -983,7 +1456,7 @@ function RSVPPage() {
                                             children: "Dietary Restrictions"
                                         }, void 0, false, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 150,
+                                            lineNumber: 306,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -995,13 +1468,13 @@ function RSVPPage() {
                                             className: "border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
                                         }, void 0, false, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 151,
+                                            lineNumber: 307,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 149,
+                                    lineNumber: 305,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1013,14 +1486,14 @@ function RSVPPage() {
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$checkbox$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Checkbox"], {
                                                     id: "plusOne",
                                                     checked: formData.plusOne,
-                                                    onCheckedChange: (checked)=>setFormData((prev_4)=>({
-                                                                ...prev_4,
+                                                    onCheckedChange: (checked)=>setFormData((prev_9)=>({
+                                                                ...prev_9,
                                                                 plusOne: checked
                                                             })),
                                                     className: "border-gray-300 data-[state=checked]:bg-black data-[state=checked]:text-white"
                                                 }, void 0, false, {
                                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                    lineNumber: 156,
+                                                    lineNumber: 312,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -1029,13 +1502,13 @@ function RSVPPage() {
                                                     children: "I am bringing a plus one"
                                                 }, void 0, false, {
                                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                    lineNumber: 160,
+                                                    lineNumber: 316,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 155,
+                                            lineNumber: 311,
                                             columnNumber: 33
                                         }, this),
                                         formData.plusOne && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1045,35 +1518,35 @@ function RSVPPage() {
                                                 children: "We will follow up for your guest's details."
                                             }, void 0, false, {
                                                 fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                                lineNumber: 164,
+                                                lineNumber: 320,
                                                 columnNumber: 41
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 163,
+                                            lineNumber: 319,
                                             columnNumber: 54
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 154,
+                                    lineNumber: 310,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                            lineNumber: 128,
+                            lineNumber: 277,
                             columnNumber: 68
                         }, this),
-                        step === 3 && formData.attending === 'no' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        step === 4 && formData.attending === 'no' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "text-center py-12 text-gray-500 font-serif text-xl",
                             children: "We'll miss you! Click submit to confirm."
                         }, void 0, false, {
                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                            lineNumber: 169,
+                            lineNumber: 325,
                             columnNumber: 67
                         }, this),
-                        step === 4 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        step === 6 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "text-center py-12 animate-in zoom-in duration-500",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1081,7 +1554,7 @@ function RSVPPage() {
                                     children: "Thank You"
                                 }, void 0, false, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 174,
+                                    lineNumber: 330,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1089,25 +1562,25 @@ function RSVPPage() {
                                     children: "Your RSVP has been received"
                                 }, void 0, false, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 175,
+                                    lineNumber: 331,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                            lineNumber: 173,
+                            lineNumber: 329,
                             columnNumber: 36
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                    lineNumber: 91,
+                    lineNumber: 170,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "mt-12 flex justify-between items-center",
                     children: [
-                        step < 4 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                        step < 6 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                             children: [
                                 step > 1 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                     variant: "ghost",
@@ -1116,7 +1589,7 @@ function RSVPPage() {
                                     children: "Back"
                                 }, void 0, false, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 181,
+                                    lineNumber: 337,
                                     columnNumber: 41
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                     variant: "ghost",
@@ -1125,17 +1598,17 @@ function RSVPPage() {
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 181,
+                                    lineNumber: 337,
                                     columnNumber: 193
                                 }, this),
-                                step < 3 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                step < 4 || step === 4 && formData.attending === 'yes' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                     onClick: handleNext,
                                     className: "bg-black text-white rounded-none px-8 py-6 uppercase tracking-widest text-xs hover:bg-gray-800",
                                     children: "Next"
                                 }, void 0, false, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 183,
-                                    columnNumber: 41
+                                    lineNumber: 339,
+                                    columnNumber: 87
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                     onClick: handleSubmit,
                                     disabled: loading,
@@ -1145,31 +1618,31 @@ function RSVPPage() {
                                             className: "mr-2 h-4 w-4 animate-spin"
                                         }, void 0, false, {
                                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                            lineNumber: 184,
+                                            lineNumber: 340,
                                             columnNumber: 49
                                         }, this),
                                         "Submit RSVP"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                                    lineNumber: 183,
-                                    columnNumber: 193
+                                    lineNumber: 339,
+                                    columnNumber: 239
                                 }, this)
                             ]
                         }, void 0, true),
-                        step === 4 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                        step === 6 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                             onClick: ()=>router.push('/'),
                             className: "w-full bg-black text-white rounded-none px-8 py-6 uppercase tracking-widest text-xs hover:bg-gray-800",
                             children: "Back to Home"
                         }, void 0, false, {
                             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                            lineNumber: 188,
+                            lineNumber: 344,
                             columnNumber: 36
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                    lineNumber: 179,
+                    lineNumber: 335,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1182,27 +1655,27 @@ function RSVPPage() {
                         className: "mx-auto opacity-40"
                     }, void 0, false, {
                         fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                        lineNumber: 193,
+                        lineNumber: 349,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-                    lineNumber: 192,
+                    lineNumber: 348,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-            lineNumber: 82,
+            lineNumber: 161,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/app/rsvp/page.tsx",
-        lineNumber: 81,
+        lineNumber: 160,
         columnNumber: 10
     }, this);
 }
-_s(RSVPPage, "1xFCGwbXoN0rjEWxVHxHeGkb1gw=", false, function() {
+_s(RSVPPage, "qxIJlfq7fGyyWGmB/FJNtK6eRIg=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]
     ];

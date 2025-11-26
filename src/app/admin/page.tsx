@@ -20,6 +20,8 @@ interface GuestWithAddress extends Guest {
     city: string | null
     state: string | null
     zip: string | null
+    phone: string | null
+    guestRelationship: string | null
 }
 
 async function getGuests(): Promise<GuestWithAddress[]> {
@@ -83,9 +85,11 @@ export default async function AdminDashboard() {
                                 <TableRow className="border-b border-gray-200 hover:bg-transparent">
                                     <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Name</TableHead>
                                     <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Email</TableHead>
+                                    <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Phone</TableHead>
+                                    <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Relationship</TableHead>
                                     <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Status</TableHead>
-                                    <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Meal</TableHead>
-                                    <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Details</TableHead>
+                                    <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Ceremony</TableHead>
+                                    <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Address</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -93,6 +97,8 @@ export default async function AdminDashboard() {
                                     <TableRow key={guest.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                         <TableCell className="p-4 font-serif text-lg">{guest.firstName} {guest.lastName}</TableCell>
                                         <TableCell className="p-4 text-gray-600">{guest.email}</TableCell>
+                                        <TableCell className="p-4 text-gray-600">{guest.phone || '-'}</TableCell>
+                                        <TableCell className="p-4 text-gray-600 uppercase tracking-wider text-xs">{guest.guestRelationship || '-'}</TableCell>
                                         <TableCell className="p-4">
                                             <span className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium uppercase tracking-wider ${guest.rsvpStatus === 'ACCEPTED' ? 'text-green-600 bg-green-50' :
                                                 guest.rsvpStatus === 'DECLINED' ? 'text-red-600 bg-red-50' :
@@ -103,7 +109,10 @@ export default async function AdminDashboard() {
                                         </TableCell>
                                         <TableCell className="p-4 text-gray-600 capitalize">{guest.mealPreference || '-'}</TableCell>
                                         <TableCell className="p-4 text-gray-500 text-sm">
-                                            {[guest.city, guest.state].filter(Boolean).join(', ') || '-'}
+                                            <div className="flex flex-col">
+                                                <span>{guest.address}</span>
+                                                <span>{[guest.city, guest.state, guest.zip].filter(Boolean).join(', ')}</span>
+                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))}

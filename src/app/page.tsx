@@ -4,31 +4,18 @@ import Image from "next/image"
 import { Calendar, MapPin, Heart } from "lucide-react"
 import Hotels from "@/components/Hotels"
 import DressCode from "@/components/DressCode"
-import AddressForm from "@/components/AddressForm"
 import Countdown from "@/components/Countdown"
 
+import Navbar from "@/components/Navbar"
 import LogoLoop from "@/components/LogoLoop"
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white z-50 border-b border-gray-100">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="font-serif text-xl font-bold tracking-widest">#SICA</div>
-          <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest">
-            <Link href="#story" className="hover:text-gray-500 transition-colors">Our Story</Link>
-            <Link href="#schedule" className="hover:text-gray-500 transition-colors">Schedule</Link>
-            <Link href="#hotels" className="hover:text-gray-500 transition-colors">Hotels</Link>
-            <Link href="/rsvp" className="bg-black text-white px-6 py-2 hover:bg-gray-800 transition-colors">
-              RSVP
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <section className="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-24 pb-12 overflow-hidden">
-        <div className="animate-fade-in-up w-full max-w-6xl mx-auto mb-12">
+        <div className="animate-fade-in-up w-full max-w-6xl mx-auto mb-8 md:mb-12">
           <LogoLoop
             logos={[
               { src: "/hero-1.jpg", alt: "Couple Photo 1" },
@@ -40,20 +27,35 @@ export default function Home() {
             speed={30}
             direction="left"
             pauseOnHover={false}
+            className="hidden md:block"
+          />
+          {/* Mobile specific LogoLoop with smaller height */}
+          <LogoLoop
+            logos={[
+              { src: "/hero-1.jpg", alt: "Couple Photo 1" },
+              { src: "/hero-2.jpg", alt: "Couple Photo 2" },
+              { src: "/hero-3.jpg", alt: "Couple Photo 3" }
+            ]}
+            logoHeight="45vh"
+            gap="20px"
+            speed={20}
+            direction="left"
+            pauseOnHover={false}
+            className="md:hidden"
           />
         </div>
 
-        <p className="text-gray-500 uppercase tracking-[0.2em] mb-4">We're getting married</p>
-        <h1 className="font-serif text-6xl md:text-8xl mb-6">Simon & Catherine</h1>
+        <p className="text-gray-500 uppercase tracking-[0.2em] mb-4 text-sm md:text-base">We're getting married</p>
+        <h1 className="font-serif text-5xl md:text-8xl mb-6 leading-tight">Simon &<br className="md:hidden" /> Catherine</h1>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-lg font-light mb-12">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-base md:text-lg font-light mb-12">
           <div className="flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-gray-400" />
+            <Calendar className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
             <span>May 30, 2026</span>
           </div>
           <div className="hidden md:block text-gray-300">|</div>
           <div className="flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-gray-400" />
+            <MapPin className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
             <span>Amsterdam, NL</span>
           </div>
         </div>
@@ -61,7 +63,7 @@ export default function Home() {
         <Countdown />
 
         <div className="mt-8">
-          <Link href="/rsvp" className="inline-block bg-black text-white px-12 py-4 text-lg uppercase tracking-widest hover:bg-gray-800 transition-colors">
+          <Link href="/rsvp" className="inline-block bg-black text-white px-10 py-3 md:px-12 md:py-4 text-base md:text-lg uppercase tracking-widest hover:bg-gray-800 transition-colors">
             RSVP Now
           </Link>
         </div>
@@ -125,26 +127,21 @@ export default function Home() {
       </section>
 
       {/* Hotels Section */}
-      < Hotels />
+      <Hotels />
 
       {/* Dress Code Section */}
-      < DressCode />
+      <DressCode />
 
 
-
-      {/* Address Collection Section */}
-      < section id="address" className="py-24 bg-gray-50" >
-        <AddressForm />
-      </section >
 
       {/* Footer */}
-      < footer className="bg-black text-white py-12 text-center" >
+      <footer className="bg-black text-white py-12 text-center">
         <div className="container mx-auto px-4">
           <h2 className="font-serif text-2xl mb-4">Simon & Catherine</h2>
           <p className="text-gray-400 text-sm">May 30, 2026 • Napa Valley, CA</p>
         </div>
-      </footer >
-    </div >
+      </footer>
+    </div>
   )
 }
 

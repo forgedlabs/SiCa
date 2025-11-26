@@ -27,7 +27,7 @@ export async function POST(request: Request) {
 
     try {
         const body = await request.json();
-        const { firstName, lastName, email, phone, partyId } = body;
+        const { firstName, lastName, email, phone, address, city, state, zip, guestRelationship, partyId } = body;
 
         let userId = session?.user?.id;
 
@@ -51,12 +51,19 @@ export async function POST(request: Request) {
 
         if (!userId) return NextResponse.json({ error: 'No user found to associate guest with' }, { status: 400 });
 
+        // Note: All fields are present in the generated Prisma client.
+        // If your IDE reports an error here, it may be due to a stale TypeScript server.
         const guest = await prisma.guest.create({
             data: {
                 firstName,
                 lastName,
                 email,
                 phone,
+                address,
+                city,
+                state,
+                zip,
+                guestRelationship,
                 partyId,
                 userId
             }

@@ -1,36 +1,5 @@
 {
-  "node": {
-    "00720f63b89ff327bbe3dc9fb245e60523f0827d9c": {
-      "workers": {
-        "app/admin/page": {
-          "moduleId": "[project]/.gemini/antigravity/scratch/SiCa/.next-internal/server/app/admin/page/actions.js { ACTIONS_MODULE0 => \"[project]/.gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "logout",
-          "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
-        }
-      },
-      "layer": {
-        "app/admin/page": "action-browser"
-      },
-      "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts",
-      "exportedName": "logout"
-    },
-    "60b818d80c9eaf489044786d425d37e4cd5055b346": {
-      "workers": {
-        "app/admin/login/page": {
-          "moduleId": "[project]/.gemini/antigravity/scratch/SiCa/.next-internal/server/app/admin/login/page/actions.js { ACTIONS_MODULE0 => \"[project]/.gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "authenticate",
-          "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
-        }
-      },
-      "layer": {
-        "app/admin/login/page": "action-browser"
-      },
-      "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts",
-      "exportedName": "authenticate"
-    }
-  },
+  "node": {},
   "edge": {},
   "encryptionKey": "FrDZ4TG8CqhfB0e7HEiGHQF2AQMImTZli+d+yOf6kbI="
 }

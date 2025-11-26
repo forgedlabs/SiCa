@@ -177,7 +177,7 @@ async function POST(request) {
     // Allow public POST for RSVP, but we need a userId to associate the guest with.
     try {
         const body = await request.json();
-        const { firstName, lastName, email, phone, address, city, state, zip, partyId } = body;
+        const { firstName, lastName, email, phone, address, city, state, zip, guestRelationship, partyId } = body;
         let userId = session?.user?.id;
         if (!userId) {
             // Fallback to the first user (Admin) for public RSVPs
@@ -201,6 +201,8 @@ async function POST(request) {
         }, {
             status: 400
         });
+        // Note: All fields are present in the generated Prisma client.
+        // If your IDE reports an error here, it may be due to a stale TypeScript server.
         const guest = await prisma.guest.create({
             data: {
                 firstName,
@@ -211,6 +213,7 @@ async function POST(request) {
                 city,
                 state,
                 zip,
+                guestRelationship,
                 partyId,
                 userId
             }
