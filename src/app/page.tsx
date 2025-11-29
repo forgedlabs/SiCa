@@ -180,9 +180,17 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-black text-white py-12 text-center">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 flex flex-col items-center">
           <h2 className="font-serif text-2xl mb-4">Simon & Catherine</h2>
-          <p className="text-gray-400 text-sm">May 30, 2026 • Napa Valley, CA</p>
+          <p className="text-gray-400 text-sm mb-8">May 30, 2026 • Amsterdam, NL</p>
+          <div className="relative w-20 h-20 opacity-80">
+            <Image
+              src="/hero-logo.png"
+              alt="SICA Logo"
+              fill
+              className="object-contain invert"
+            />
+          </div>
         </div>
       </footer>
     </div>
