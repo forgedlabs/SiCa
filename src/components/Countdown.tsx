@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 
 export default function Countdown() {
+    const [mounted, setMounted] = useState(false)
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
         hours: 0,
@@ -11,6 +12,7 @@ export default function Countdown() {
     })
 
     useEffect(() => {
+        setMounted(true)
         const targetDate = new Date("2026-05-30T16:00:00")
 
         const interval = setInterval(() => {
@@ -29,6 +31,29 @@ export default function Countdown() {
 
         return () => clearInterval(interval)
     }, [])
+
+    if (!mounted) {
+        return (
+            <div className="flex gap-4 md:gap-8 text-center justify-center mb-12 font-serif text-[#333]">
+                <div>
+                    <div className="text-3xl md:text-5xl mb-2">--</div>
+                    <div className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Days</div>
+                </div>
+                <div>
+                    <div className="text-3xl md:text-5xl mb-2">--</div>
+                    <div className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Hours</div>
+                </div>
+                <div>
+                    <div className="text-3xl md:text-5xl mb-2">--</div>
+                    <div className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Mins</div>
+                </div>
+                <div>
+                    <div className="text-3xl md:text-5xl mb-2">--</div>
+                    <div className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Secs</div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="flex gap-4 md:gap-8 text-center justify-center mb-12 font-serif text-[#333]">

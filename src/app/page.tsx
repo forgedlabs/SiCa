@@ -1,7 +1,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Calendar, MapPin, Heart } from "lucide-react"
+import { Calendar, MapPin, Heart, Map } from "lucide-react"
 import Hotels from "@/components/Hotels"
 import DressCode from "@/components/DressCode"
 import Countdown from "@/components/Countdown"
@@ -45,8 +45,20 @@ export default function Home() {
           />
         </div>
 
-        <p className="text-gray-500 uppercase tracking-[0.2em] mb-4 text-sm md:text-base">We're getting married</p>
-        <h1 className="font-serif text-5xl md:text-8xl mb-6 leading-tight">Simon &<br className="md:hidden" /> Catherine</h1>
+        <p className="w-full text-center text-gray-500 uppercase tracking-[0.2em] mb-4 text-sm md:text-base">We're getting married</p>
+        <h1 className="w-full text-center font-serif text-5xl md:text-8xl mb-6 leading-tight uppercase flex flex-col items-center gap-4">
+          <span>Simon</span>
+          <div className="relative w-32 h-32 md:w-40 md:h-40 my-2">
+            <Image
+              src="/hero-logo.png"
+              alt="S&C Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          <span>Catherine</span>
+        </h1>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-base md:text-lg font-light mb-12">
           <div className="flex items-center gap-2">
@@ -78,48 +90,80 @@ export default function Home() {
           </div>
           <div className="space-y-12">
             <div className="border-b border-gray-100 pb-12">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+              <div className="flex flex-col items-center gap-2 mb-4 text-center">
                 <h3 className="font-serif text-2xl">Traditional Marriage Ceremony</h3>
                 <p className="text-gray-500 uppercase tracking-widest text-xs">Saturday, May 30 • 9:00 - 12:30</p>
               </div>
-              <div className="space-y-1 text-gray-600">
+              <div className="space-y-1 text-gray-600 text-center">
                 <p className="font-medium">Yaklaf Events</p>
                 <p className="text-sm">Bloemendalerweg 50</p>
                 <p className="text-sm">1382 KS Weesp, The Netherlands</p>
+                <Link
+                  href="https://www.google.com/maps/search/?api=1&query=Yaklaf+Events+Bloemendalerweg+50+1382+KS+Weesp+The+Netherlands"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center mt-2 text-black hover:text-gray-600 transition-colors"
+                >
+                  <Map className="w-5 h-5" />
+                </Link>
               </div>
             </div>
             <div className="border-b border-gray-100 pb-12">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+              <div className="flex flex-col items-center gap-2 mb-4 text-center">
                 <h3 className="font-serif text-2xl">Ceremonial Exchange of Vows</h3>
                 <p className="text-gray-500 uppercase tracking-widest text-xs">Saturday, May 30 • 17:00 - 18:00</p>
               </div>
-              <div className="space-y-1 text-gray-600">
+              <div className="space-y-1 text-gray-600 text-center">
                 <p className="font-medium">Rey Events</p>
                 <p className="text-sm">Trekweg 21</p>
                 <p className="text-sm">1338 GA Almere, The Netherlands</p>
+                <Link
+                  href="https://www.google.com/maps/search/?api=1&query=Rey+Events+Trekweg+21+1338+GA+Almere+The+Netherlands"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center mt-2 text-black hover:text-gray-600 transition-colors"
+                >
+                  <Map className="w-5 h-5" />
+                </Link>
               </div>
             </div>
             <div className="border-b border-gray-100 pb-12">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+              <div className="flex flex-col items-center gap-2 mb-4 text-center">
                 <h3 className="font-serif text-2xl">Reception</h3>
                 <p className="text-gray-500 uppercase tracking-widest text-xs">Saturday, May 30 • 18:00 - 01:00</p>
               </div>
-              <div className="space-y-1 text-gray-600">
+              <div className="space-y-1 text-gray-600 text-center">
                 <p className="font-medium">Rey Events</p>
                 <p className="text-sm">Trekweg 21</p>
                 <p className="text-sm">1338 GA Almere, The Netherlands</p>
+                <Link
+                  href="https://www.google.com/maps/search/?api=1&query=Rey+Events+Trekweg+21+1338+GA+Almere+The+Netherlands"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center mt-2 text-black hover:text-gray-600 transition-colors"
+                >
+                  <Map className="w-5 h-5" />
+                </Link>
               </div>
             </div>
             <div className="pb-4">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+              <div className="flex flex-col items-center gap-2 mb-4 text-center">
                 <h3 className="font-serif text-2xl">Thanksgiving Service</h3>
                 <p className="text-gray-500 uppercase tracking-widest text-xs">Sunday, May 31 • 09:30 - 12:00</p>
               </div>
-              <div className="space-y-1 text-gray-600">
+              <div className="space-y-1 text-gray-600 text-center">
                 <p className="font-medium">Damascus CCI Amsterdam</p>
                 <p className="text-sm">(Charity house, second floor)</p>
                 <p className="text-sm">Bijlmerdreef 1239</p>
                 <p className="text-sm">1103 TX Amsterdam, The Netherlands</p>
+                <Link
+                  href="https://www.google.com/maps/search/?api=1&query=Damascus+CCI+Amsterdam+Bijlmerdreef+1239+1103+TX+Amsterdam+The+Netherlands"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center mt-2 text-black hover:text-gray-600 transition-colors"
+                >
+                  <Map className="w-5 h-5" />
+                </Link>
               </div>
             </div>
           </div>

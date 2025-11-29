@@ -9,18 +9,18 @@ export default function DressCode() {
 
                 <div className="space-y-12">
                     <div className="border-b border-gray-100 pb-12">
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                        <div className="flex flex-col items-center gap-2 mb-4 text-center">
                             <h3 className="font-serif text-2xl">Traditional Marriage Ceremony</h3>
                             <p className="text-gray-500 uppercase tracking-widest text-xs">Traditional African Wear</p>
                         </div>
-                        <p className="text-gray-600">Please honor our culture by wearing traditional African attire.</p>
+                        <p className="text-gray-600 text-center">Please honor our culture by wearing traditional African attire.</p>
                     </div>
                     <div className="pb-4">
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                        <div className="flex flex-col items-center gap-2 mb-4 text-center">
                             <h3 className="font-serif text-2xl">Reception</h3>
                             <p className="text-gray-500 uppercase tracking-widest text-xs">Black Tie</p>
                         </div>
-                        <p className="text-gray-600">An evening of elegance. Formal attire is requested for the reception.</p>
+                        <p className="text-gray-600 text-center">An evening of elegance. Formal attire is requested for the reception.</p>
                     </div>
                 </div>
             </div>
