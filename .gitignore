@@ -24,3 +24,11 @@ dist-ssr
 *.sw?
 
 /src/generated/prisma
+
+# Next.js
+.next/
+out/
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
