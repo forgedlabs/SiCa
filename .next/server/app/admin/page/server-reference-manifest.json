@@ -14,6 +14,36 @@
       },
       "exportedName": "logout",
       "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+    },
+    "60af74cbe4a73fe0946198c90dc8a2022cd89a7d25": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": 16059,
+          "async": false,
+          "exportedName": "addGuest",
+          "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/page": "action-browser"
+      },
+      "exportedName": "addGuest",
+      "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+    },
+    "408f7fbf250d9cac210c906b75ae02889c863902c2": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": 16059,
+          "async": false,
+          "exportedName": "deleteGuest",
+          "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/page": "action-browser"
+      },
+      "exportedName": "deleteGuest",
+      "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
     }
   },
   "edge": {}

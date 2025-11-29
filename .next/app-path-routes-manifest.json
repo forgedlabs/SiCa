@@ -6,6 +6,7 @@
   "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
   "/api/guests/route": "/api/guests",
   "/api/rsvp/route": "/api/rsvp",
+  "/faq/page": "/faq",
   "/favicon.ico/route": "/favicon.ico",
   "/page": "/",
   "/rsvp/page": "/rsvp"

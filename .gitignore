@@ -32,3 +32,5 @@ out/
 # Prisma
 prisma/*.db
 prisma/*.db-journal
+.vercel
+.env*.local

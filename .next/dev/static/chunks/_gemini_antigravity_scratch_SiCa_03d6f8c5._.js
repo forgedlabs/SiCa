@@ -16,13 +16,14 @@ var _s = __turbopack_context__.k.signature();
 ;
 function Countdown() {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(29);
-    if ($[0] !== "16c53fed511f14b05ae3fdda0ba21000304d3e61159e7549f369050e5238c331") {
-        for(let $i = 0; $i < 29; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(30);
+    if ($[0] !== "c3ed3288f484ba800facf5d01868888eed62275021dc012bb3c24514d6cdd90e") {
+        for(let $i = 0; $i < 30; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "16c53fed511f14b05ae3fdda0ba21000304d3e61159e7549f369050e5238c331";
+        $[0] = "c3ed3288f484ba800facf5d01868888eed62275021dc012bb3c24514d6cdd90e";
     }
+    const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
         t0 = {
@@ -41,6 +42,7 @@ function Countdown() {
     if ($[2] === Symbol.for("react.memo_cache_sentinel")) {
         t1 = ({
             "Countdown[useEffect()]": ()=>{
+                setMounted(true);
                 const targetDate = new Date("2026-05-30T16:00:00");
                 const interval = setInterval({
                     "Countdown[useEffect() > setInterval()]": ()=>{
@@ -67,37 +69,151 @@ function Countdown() {
         t2 = $[3];
     }
     (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(t1, t2);
+    if (!mounted) {
+        let t3;
+        if ($[4] === Symbol.for("react.memo_cache_sentinel")) {
+            t3 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex gap-4 md:gap-8 text-center justify-center mb-12 font-serif text-[#333]",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-3xl md:text-5xl mb-2",
+                                children: "--"
+                            }, void 0, false, {
+                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                                lineNumber: 62,
+                                columnNumber: 110
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-[10px] md:text-xs uppercase tracking-widest text-gray-400",
+                                children: "Days"
+                            }, void 0, false, {
+                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                                lineNumber: 62,
+                                columnNumber: 161
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                        lineNumber: 62,
+                        columnNumber: 105
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-3xl md:text-5xl mb-2",
+                                children: "--"
+                            }, void 0, false, {
+                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                                lineNumber: 62,
+                                columnNumber: 262
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-[10px] md:text-xs uppercase tracking-widest text-gray-400",
+                                children: "Hours"
+                            }, void 0, false, {
+                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                                lineNumber: 62,
+                                columnNumber: 313
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                        lineNumber: 62,
+                        columnNumber: 257
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-3xl md:text-5xl mb-2",
+                                children: "--"
+                            }, void 0, false, {
+                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                                lineNumber: 62,
+                                columnNumber: 415
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-[10px] md:text-xs uppercase tracking-widest text-gray-400",
+                                children: "Mins"
+                            }, void 0, false, {
+                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                                lineNumber: 62,
+                                columnNumber: 466
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                        lineNumber: 62,
+                        columnNumber: 410
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-3xl md:text-5xl mb-2",
+                                children: "--"
+                            }, void 0, false, {
+                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                                lineNumber: 62,
+                                columnNumber: 567
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-[10px] md:text-xs uppercase tracking-widest text-gray-400",
+                                children: "Secs"
+                            }, void 0, false, {
+                                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                                lineNumber: 62,
+                                columnNumber: 618
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                        lineNumber: 62,
+                        columnNumber: 562
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
+                lineNumber: 62,
+                columnNumber: 12
+            }, this);
+            $[4] = t3;
+        } else {
+            t3 = $[4];
+        }
+        return t3;
+    }
     let t3;
-    if ($[4] !== timeLeft.days) {
+    if ($[5] !== timeLeft.days) {
         t3 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "text-3xl md:text-5xl mb-2",
             children: timeLeft.days
         }, void 0, false, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 59,
+            lineNumber: 71,
             columnNumber: 10
         }, this);
-        $[4] = timeLeft.days;
-        $[5] = t3;
+        $[5] = timeLeft.days;
+        $[6] = t3;
     } else {
-        t3 = $[5];
+        t3 = $[6];
     }
     let t4;
-    if ($[6] === Symbol.for("react.memo_cache_sentinel")) {
+    if ($[7] === Symbol.for("react.memo_cache_sentinel")) {
         t4 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "text-[10px] md:text-xs uppercase tracking-widest text-gray-400",
             children: "Days"
         }, void 0, false, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 67,
+            lineNumber: 79,
             columnNumber: 10
         }, this);
-        $[6] = t4;
+        $[7] = t4;
     } else {
-        t4 = $[6];
+        t4 = $[7];
     }
     let t5;
-    if ($[7] !== t3) {
+    if ($[8] !== t3) {
         t5 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             children: [
                 t3,
@@ -105,45 +221,45 @@ function Countdown() {
             ]
         }, void 0, true, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 74,
+            lineNumber: 86,
             columnNumber: 10
         }, this);
-        $[7] = t3;
-        $[8] = t5;
+        $[8] = t3;
+        $[9] = t5;
     } else {
-        t5 = $[8];
+        t5 = $[9];
     }
     let t6;
-    if ($[9] !== timeLeft.hours) {
+    if ($[10] !== timeLeft.hours) {
         t6 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "text-3xl md:text-5xl mb-2",
             children: timeLeft.hours
         }, void 0, false, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 82,
+            lineNumber: 94,
             columnNumber: 10
         }, this);
-        $[9] = timeLeft.hours;
-        $[10] = t6;
+        $[10] = timeLeft.hours;
+        $[11] = t6;
     } else {
-        t6 = $[10];
+        t6 = $[11];
     }
     let t7;
-    if ($[11] === Symbol.for("react.memo_cache_sentinel")) {
+    if ($[12] === Symbol.for("react.memo_cache_sentinel")) {
         t7 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "text-[10px] md:text-xs uppercase tracking-widest text-gray-400",
             children: "Hours"
         }, void 0, false, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 90,
+            lineNumber: 102,
             columnNumber: 10
         }, this);
-        $[11] = t7;
+        $[12] = t7;
     } else {
-        t7 = $[11];
+        t7 = $[12];
     }
     let t8;
-    if ($[12] !== t6) {
+    if ($[13] !== t6) {
         t8 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             children: [
                 t6,
@@ -151,45 +267,45 @@ function Countdown() {
             ]
         }, void 0, true, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 97,
+            lineNumber: 109,
             columnNumber: 10
         }, this);
-        $[12] = t6;
-        $[13] = t8;
+        $[13] = t6;
+        $[14] = t8;
     } else {
-        t8 = $[13];
+        t8 = $[14];
     }
     let t9;
-    if ($[14] !== timeLeft.minutes) {
+    if ($[15] !== timeLeft.minutes) {
         t9 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "text-3xl md:text-5xl mb-2",
             children: timeLeft.minutes
         }, void 0, false, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 105,
+            lineNumber: 117,
             columnNumber: 10
         }, this);
-        $[14] = timeLeft.minutes;
-        $[15] = t9;
+        $[15] = timeLeft.minutes;
+        $[16] = t9;
     } else {
-        t9 = $[15];
+        t9 = $[16];
     }
     let t10;
-    if ($[16] === Symbol.for("react.memo_cache_sentinel")) {
+    if ($[17] === Symbol.for("react.memo_cache_sentinel")) {
         t10 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "text-[10px] md:text-xs uppercase tracking-widest text-gray-400",
             children: "Mins"
         }, void 0, false, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 113,
+            lineNumber: 125,
             columnNumber: 11
         }, this);
-        $[16] = t10;
+        $[17] = t10;
     } else {
-        t10 = $[16];
+        t10 = $[17];
     }
     let t11;
-    if ($[17] !== t9) {
+    if ($[18] !== t9) {
         t11 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             children: [
                 t9,
@@ -197,45 +313,45 @@ function Countdown() {
             ]
         }, void 0, true, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 120,
+            lineNumber: 132,
             columnNumber: 11
         }, this);
-        $[17] = t9;
-        $[18] = t11;
+        $[18] = t9;
+        $[19] = t11;
     } else {
-        t11 = $[18];
+        t11 = $[19];
     }
     let t12;
-    if ($[19] !== timeLeft.seconds) {
+    if ($[20] !== timeLeft.seconds) {
         t12 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "text-3xl md:text-5xl mb-2",
             children: timeLeft.seconds
         }, void 0, false, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 128,
+            lineNumber: 140,
             columnNumber: 11
         }, this);
-        $[19] = timeLeft.seconds;
-        $[20] = t12;
+        $[20] = timeLeft.seconds;
+        $[21] = t12;
     } else {
-        t12 = $[20];
+        t12 = $[21];
     }
     let t13;
-    if ($[21] === Symbol.for("react.memo_cache_sentinel")) {
+    if ($[22] === Symbol.for("react.memo_cache_sentinel")) {
         t13 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "text-[10px] md:text-xs uppercase tracking-widest text-gray-400",
             children: "Secs"
         }, void 0, false, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 136,
+            lineNumber: 148,
             columnNumber: 11
         }, this);
-        $[21] = t13;
+        $[22] = t13;
     } else {
-        t13 = $[21];
+        t13 = $[22];
     }
     let t14;
-    if ($[22] !== t12) {
+    if ($[23] !== t12) {
         t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             children: [
                 t12,
@@ -243,16 +359,16 @@ function Countdown() {
             ]
         }, void 0, true, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 143,
+            lineNumber: 155,
             columnNumber: 11
         }, this);
-        $[22] = t12;
-        $[23] = t14;
+        $[23] = t12;
+        $[24] = t14;
     } else {
-        t14 = $[23];
+        t14 = $[24];
     }
     let t15;
-    if ($[24] !== t11 || $[25] !== t14 || $[26] !== t5 || $[27] !== t8) {
+    if ($[25] !== t11 || $[26] !== t14 || $[27] !== t5 || $[28] !== t8) {
         t15 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex gap-4 md:gap-8 text-center justify-center mb-12 font-serif text-[#333]",
             children: [
@@ -263,20 +379,20 @@ function Countdown() {
             ]
         }, void 0, true, {
             fileName: "[project]/.gemini/antigravity/scratch/SiCa/src/components/Countdown.tsx",
-            lineNumber: 151,
+            lineNumber: 163,
             columnNumber: 11
         }, this);
-        $[24] = t11;
-        $[25] = t14;
-        $[26] = t5;
-        $[27] = t8;
-        $[28] = t15;
+        $[25] = t11;
+        $[26] = t14;
+        $[27] = t5;
+        $[28] = t8;
+        $[29] = t15;
     } else {
-        t15 = $[28];
+        t15 = $[29];
     }
     return t15;
 }
-_s(Countdown, "Po8YfzCsTU+PzL269BfNN8z12tQ=");
+_s(Countdown, "eQx+TYr/ZLaVd6jn4yUqDHSGhBk=");
 _c = Countdown;
 var _c;
 __turbopack_context__.k.register(_c, "Countdown");

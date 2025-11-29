@@ -2,6 +2,8 @@ import { auth } from "@/auth"
 import { PrismaClient, Guest } from "@prisma/client"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { LogoutButton } from "@/components/LogoutButton"
+import { AddGuestForm } from "@/components/AddGuestForm"
+import { DeleteGuestButton } from "@/components/DeleteGuestButton"
 
 const prisma = new PrismaClient()
 
@@ -40,7 +42,7 @@ export default async function AdminDashboard() {
 
     return (
         <div className="p-8 bg-white min-h-screen text-black">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-7xl mx-auto">
                 <div className="flex justify-between items-end mb-12 border-b border-gray-100 pb-6">
                     <div>
                         <h1 className="font-serif text-4xl mb-2">Dashboard</h1>
@@ -74,9 +76,12 @@ export default async function AdminDashboard() {
 
                 {/* Guest List */}
                 <div>
-                    <div className="mb-8">
-                        <h2 className="font-serif text-2xl mb-2">Guest List</h2>
-                        <p className="text-gray-500 uppercase tracking-widest text-xs">Manage RSVPs</p>
+                    <div className="flex justify-between items-end mb-8">
+                        <div>
+                            <h2 className="font-serif text-2xl mb-2">Guest List</h2>
+                            <p className="text-gray-500 uppercase tracking-widest text-xs">Manage RSVPs</p>
+                        </div>
+                        <AddGuestForm />
                     </div>
 
                     <div className="overflow-x-auto">
@@ -90,6 +95,7 @@ export default async function AdminDashboard() {
                                     <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Status</TableHead>
                                     <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Ceremony</TableHead>
                                     <TableHead className="h-12 px-4 text-left align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Address</TableHead>
+                                    <TableHead className="h-12 px-4 text-right align-middle font-medium text-gray-500 uppercase tracking-widest text-xs">Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -113,6 +119,9 @@ export default async function AdminDashboard() {
                                                 <span>{guest.address}</span>
                                                 <span>{[guest.city, guest.state, guest.zip].filter(Boolean).join(', ')}</span>
                                             </div>
+                                        </TableCell>
+                                        <TableCell className="p-4 text-right">
+                                            <DeleteGuestButton guestId={guest.id} />
                                         </TableCell>
                                     </TableRow>
                                 ))}

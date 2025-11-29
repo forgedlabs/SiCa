@@ -26,7 +26,8 @@ const authConfig = {
         authorized ({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user;
             const isOnAdmin = nextUrl.pathname.startsWith('/admin');
-            if (isOnAdmin) {
+            const isLoginPage = nextUrl.pathname === '/admin/login';
+            if (isOnAdmin && !isLoginPage) {
                 if (isLoggedIn) return true;
                 return false // Redirect unauthenticated users to login page
                 ;
@@ -34,7 +35,10 @@ const authConfig = {
             return true;
         }
     },
-    providers: []
+    providers: [],
+    session: {
+        maxAge: 900
+    }
 };
 }),
 "[project]/.gemini/antigravity/scratch/SiCa/src/middleware.ts [middleware-edge] (ecmascript)", ((__turbopack_context__) => {

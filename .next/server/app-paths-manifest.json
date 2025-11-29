@@ -6,6 +6,7 @@
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/api/guests/route": "app/api/guests/route.js",
   "/api/rsvp/route": "app/api/rsvp/route.js",
+  "/faq/page": "app/faq/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/page": "app/page.js",
   "/rsvp/page": "app/rsvp/page.js"

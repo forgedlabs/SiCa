@@ -15,6 +15,36 @@
       "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts",
       "exportedName": "logout"
     },
+    "60af74cbe4a73fe0946198c90dc8a2022cd89a7d25": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": 16059,
+          "async": false,
+          "exportedName": "addGuest",
+          "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/page": "action-browser"
+      },
+      "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts",
+      "exportedName": "addGuest"
+    },
+    "408f7fbf250d9cac210c906b75ae02889c863902c2": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": 16059,
+          "async": false,
+          "exportedName": "deleteGuest",
+          "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/page": "action-browser"
+      },
+      "filename": ".gemini/antigravity/scratch/SiCa/src/app/lib/actions.ts",
+      "exportedName": "deleteGuest"
+    },
     "6044c74c0e669d4d78d990b61700d0e0bf0dcd3558": {
       "workers": {
         "app/admin/login/page": {

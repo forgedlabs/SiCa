@@ -18,4 +18,7 @@ export const authConfig = {
         },
     },
     providers: [], // Add providers with an empty array for now
+    session: {
+        maxAge: 900, // 15 minutes
+    },
 } satisfies NextAuthConfig

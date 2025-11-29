@@ -20,7 +20,8 @@ const authConfig = {
         authorized ({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user;
             const isOnAdmin = nextUrl.pathname.startsWith('/admin');
-            if (isOnAdmin) {
+            const isLoginPage = nextUrl.pathname === '/admin/login';
+            if (isOnAdmin && !isLoginPage) {
                 if (isLoggedIn) return true;
                 return false // Redirect unauthenticated users to login page
                 ;
@@ -100,7 +101,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$s
 ;
 async function authenticate(prevState, formData) {
     try {
-        await (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$auth$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["signIn"])('credentials', formData);
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$src$2f$auth$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["signIn"])('credentials', {
+            ...Object.fromEntries(formData),
+            redirectTo: '/admin'
+        });
     } catch (error) {
         if (error instanceof __TURBOPACK__imported__module__$5b$project$5d2f2e$gemini$2f$antigravity$2f$scratch$2f$SiCa$2f$node_modules$2f40$auth$2f$core$2f$errors$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["AuthError"]) {
             switch(error.type){
