@@ -70,7 +70,10 @@ export async function POST(request: Request) {
         });
         return NextResponse.json(guest);
     } catch (error) {
-        console.error(error);
-        return NextResponse.json({ error: 'Failed to create guest' }, { status: 500 });
+        console.error('Error creating guest:', error);
+        return NextResponse.json({
+            error: 'Failed to create guest',
+            details: error instanceof Error ? error.message : String(error)
+        }, { status: 500 });
     }
 }

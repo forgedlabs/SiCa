@@ -141,7 +141,10 @@ export default function RSVPPage() {
                 })
             })
 
-            if (!guestRes.ok) throw new Error('Failed to create guest')
+            if (!guestRes.ok) {
+                const errorData = await guestRes.json()
+                throw new Error(errorData.details || errorData.error || 'Failed to create guest')
+            }
             const guest = await guestRes.json()
 
             // 2. Submit RSVP
@@ -156,12 +159,19 @@ export default function RSVPPage() {
                 })
             })
 
-            if (!rsvpRes.ok) throw new Error('Failed to submit RSVP')
+            if (!rsvpRes.ok) {
+                const errorData = await rsvpRes.json()
+                throw new Error(errorData.details || errorData.error || 'Failed to submit RSVP')
+            }
 
             setStep(6) // Success step
         } catch (error) {
             console.error(error)
-            alert('Something went wrong. Please try again.')
+            if (error instanceof Error) {
+                alert(error.message)
+            } else {
+                alert('Something went wrong. Please try again.')
+            }
         } finally {
             setLoading(false)
         }
