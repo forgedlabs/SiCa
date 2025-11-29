@@ -17,7 +17,10 @@ export function DeleteGuestButton({ guestId }: { guestId: string }) {
             onClick={() => {
                 if (confirm('Are you sure you want to delete this guest?')) {
                     startTransition(async () => {
-                        await deleteGuest(guestId)
+                        const result = await deleteGuest(guestId)
+                        if (result?.message && result.message !== 'Guest deleted successfully') {
+                            alert(result.message)
+                        }
                     })
                 }
             }}
