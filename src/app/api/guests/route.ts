@@ -11,7 +11,24 @@ export async function GET(request: Request) {
     }
 
     try {
+        // Parse query parameters for filtering
+        const { searchParams } = new URL(request.url);
+        const rsvpStatus = searchParams.get('rsvpStatus');
+        const guestRelationship = searchParams.get('guestRelationship');
+
+        // Build where clause based on query params
+        const whereClause: any = {};
+
+        if (rsvpStatus && rsvpStatus !== 'all') {
+            whereClause.rsvpStatus = rsvpStatus;
+        }
+
+        if (guestRelationship && guestRelationship !== 'all') {
+            whereClause.guestRelationship = guestRelationship;
+        }
+
         const guests = await prisma.guest.findMany({
+            where: whereClause,
             include: { table: true },
             orderBy: { lastName: 'asc' }
         });

@@ -1,6 +1,9 @@
 {
   "/admin/login/page": "app/admin/login/page.js",
+  "/admin/notifications/page": "app/admin/notifications/page.js",
   "/admin/page": "app/admin/page.js",
-  "/page": "app/page.js",
+  "/api/admin/send-email/route": "app/api/admin/send-email/route.js",
+  "/api/guests/route": "app/api/guests/route.js",
+  "/api/rsvp/route": "app/api/rsvp/route.js",
   "/rsvp/page": "app/rsvp/page.js"
 }

@@ -4,6 +4,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { LogoutButton } from "@/components/LogoutButton"
 import { AddGuestForm } from "@/components/AddGuestForm"
 import { DeleteGuestButton } from "@/components/DeleteGuestButton"
+import Link from "next/link"
+import { Send } from "lucide-react"
 
 const prisma = new PrismaClient()
 
@@ -52,6 +54,17 @@ export default async function AdminDashboard() {
                         <div className="text-sm text-gray-400 uppercase tracking-widest">{session.user?.name}</div>
                         <LogoutButton />
                     </div>
+                </div>
+
+                {/* Navigation */}
+                <div className="mb-12">
+                    <Link
+                        href="/admin/notifications"
+                        className="inline-flex items-center gap-2 px-6 py-3 border border-black hover:bg-black hover:text-white transition-colors uppercase tracking-widest text-xs"
+                    >
+                        <Send className="w-4 h-4" />
+                        Send Notifications
+                    </Link>
                 </div>
 
                 {/* Stats */}
