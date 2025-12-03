@@ -28,6 +28,13 @@ export default function Hotels() {
                     <p className="text-gray-500 uppercase tracking-widest text-xs">Accommodations</p>
                 </div>
 
+                <div className="text-center max-w-2xl mx-auto mb-16">
+                    <h3 className="font-serif text-2xl mb-4">A warm welcome for our guests traveling from afar</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                        We are deeply grateful to everyone making the journey to celebrate with us whether you're crossing cities, countries, or continents. Your presence is a true gift and we want your stay in the Netherlands to be as smooth and enjoyable as possible.
+                    </p>
+                </div>
+
                 <div className="space-y-12">
                     {hotels.map((hotel, index) => (
                         <div key={index} className="border-b border-gray-100 pb-12 last:border-0 last:pb-0">

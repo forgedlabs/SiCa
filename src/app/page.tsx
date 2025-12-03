@@ -146,26 +146,6 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <div className="pb-4">
-              <div className="flex flex-col items-center gap-2 mb-4 text-center">
-                <h3 className="font-serif text-2xl">Thanksgiving Service</h3>
-                <p className="text-gray-500 uppercase tracking-widest text-xs">Sunday, May 31 • 09:30 - 12:00</p>
-              </div>
-              <div className="space-y-1 text-gray-600 text-center">
-                <p className="font-medium">Damascus CCI Amsterdam</p>
-                <p className="text-sm">(Charity house, second floor)</p>
-                <p className="text-sm">Bijlmerdreef 1239</p>
-                <p className="text-sm">1103 TX Amsterdam, The Netherlands</p>
-                <Link
-                  href="https://www.google.com/maps/search/?api=1&query=Damascus+CCI+Amsterdam+Bijlmerdreef+1239+1103+TX+Amsterdam+The+Netherlands"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center mt-2 text-black hover:text-gray-600 transition-colors"
-                >
-                  <Map className="w-5 h-5" />
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </section>

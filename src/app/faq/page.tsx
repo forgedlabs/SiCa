@@ -18,7 +18,7 @@ export default function FAQPage() {
                     <section className="border-b border-gray-200 pb-12">
                         <h2 className="font-serif text-2xl md:text-3xl mb-6 text-black tracking-wide">Are children welcome?</h2>
                         <p className="text-gray-600 leading-loose font-sans text-sm md:text-base tracking-wide">
-                            We truly adore your little ones—they bring so much joy, energy, and light. For our big day, we've planned the celebrations in a way that allows parents to relax and fully enjoy the moment with us. Children are warmly invited to the Traditional Marriage Ceremony in the morning, which will be lively, family-focused, and filled with cultural celebration. For the evening ceremony and reception, we've chosen an adults-only setting so everyone can celebrate comfortably and late into the night.
+                            We truly adore your little ones they bring so much joy, energy, and light. For our big day, we've planned the celebrations in a way that allows parents to relax and fully enjoy the moment with us. Children are warmly invited to the Traditional Marriage Ceremony in the morning, which will be lively, family focused, and filled with cultural celebration. For the evening ceremony and reception, we've chosen an adults only setting so everyone can celebrate comfortably and late into the night.
                         </p>
                     </section>
 
