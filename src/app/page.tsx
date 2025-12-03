@@ -48,15 +48,7 @@ export default function Home() {
         <p className="w-full text-center text-gray-500 uppercase tracking-[0.2em] mb-4 text-sm md:text-base">We're getting married</p>
         <h1 className="w-full text-center font-serif text-5xl md:text-8xl mb-6 leading-tight uppercase flex flex-col items-center gap-4">
           <span>Simon</span>
-          <div className="relative w-32 h-32 md:w-40 md:h-40 my-2">
-            <Image
-              src="/hero-logo.png"
-              alt="S&C Logo"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
+          <span className="text-6xl md:text-9xl font-light">&</span>
           <span>Catherine</span>
         </h1>
 
