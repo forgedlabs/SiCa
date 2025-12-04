@@ -13,6 +13,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 import { Pencil } from 'lucide-react'
 
 interface Guest {
@@ -229,17 +236,21 @@ export function EditGuestForm({ guest }: { guest: Guest }) {
                         </div>
                     </div>
 
-                    {/* Meal Preference */}
+                    {/* Ceremony Attendance (stored in mealPreference) */}
                     <div className="space-y-2">
                         <Label htmlFor="mealPreference" className="uppercase text-xs tracking-widest text-gray-500">
-                            Meal Preference
+                            Ceremony Attendance
                         </Label>
-                        <Input
-                            id="mealPreference"
-                            name="mealPreference"
-                            defaultValue={guest.mealPreference || ''}
-                            className="border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black"
-                        />
+                        <Select name="mealPreference" defaultValue={guest.mealPreference || ''}>
+                            <SelectTrigger className="border-0 border-b border-gray-200 rounded-none px-0 focus:ring-0 focus:border-black shadow-none">
+                                <SelectValue placeholder="Select ceremony attendance" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="both">Both Ceremonies</SelectItem>
+                                <SelectItem value="traditional">Traditional Ceremony Only</SelectItem>
+                                <SelectItem value="reception">Ceremonial Exchange & Reception Only</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
 
                     {/* Dietary Notes */}
