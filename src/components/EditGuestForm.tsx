@@ -13,13 +13,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+
 import { Pencil } from 'lucide-react'
 
 interface Guest {
@@ -241,16 +235,16 @@ export function EditGuestForm({ guest }: { guest: Guest }) {
                         <Label htmlFor="mealPreference" className="uppercase text-xs tracking-widest text-gray-500">
                             Ceremony Attendance
                         </Label>
-                        <Select name="mealPreference" defaultValue={guest.mealPreference || ''}>
-                            <SelectTrigger className="border-0 border-b border-gray-200 rounded-none px-0 focus:ring-0 focus:border-black shadow-none">
-                                <SelectValue placeholder="Select ceremony attendance" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="both">Both Ceremonies</SelectItem>
-                                <SelectItem value="traditional">Traditional Ceremony Only</SelectItem>
-                                <SelectItem value="reception">Ceremonial Exchange & Reception Only</SelectItem>
-                            </SelectContent>
-                        </Select>
+                        <select
+                            name="mealPreference"
+                            defaultValue={guest.mealPreference || ''}
+                            className="w-full border-0 border-b border-gray-200 bg-transparent py-2 text-sm focus:ring-0 focus:border-black rounded-none"
+                        >
+                            <option value="" disabled>Select ceremony attendance</option>
+                            <option value="both">Both Ceremonies</option>
+                            <option value="traditional">Traditional Ceremony Only</option>
+                            <option value="reception">Ceremonial Exchange & Reception Only</option>
+                        </select>
                     </div>
 
                     {/* Dietary Notes */}
