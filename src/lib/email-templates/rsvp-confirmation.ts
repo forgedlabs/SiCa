@@ -39,7 +39,11 @@ export function generateRsvpConfirmationEmail(data: RsvpConfirmationData): strin
               
               <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">Dear ${firstName} ${lastName},</p>
               
-              <p style="margin: 0 0 32px 0; font-size: 15px; line-height: 1.8; color: #000000;">Thank you for confirming your attendance. We look forward to celebrating with you.</p>
+              <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">Thank you for your RSVP!</p>
+              
+              <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">We’re so excited that you’ll be celebrating with us. We’ve received your response, and we can’t wait to share our wedding day with you on 30 May 2026.</p>
+
+              <p style="margin: 0 0 32px 0; font-size: 15px; line-height: 1.8; color: #000000;">Get ready for a day filled with love, joy, laughter, dancing, and memories we’ll cherish forever.</p>
 
               ${ceremonyPreference ? `
               <div style="margin: 0 0 24px 0; padding: 24px; background-color: #f5f5f5; border-left: 2px solid #000000;">
@@ -87,9 +91,9 @@ export function generateRsvpConfirmationEmail(data: RsvpConfirmationData): strin
                 </table>
               </div>
 
-              <p style="margin: 40px 0 0 0; font-size: 15px; line-height: 1.8; color: #000000;">We look forward to seeing you.</p>
+              <p style="margin: 40px 0 0 0; font-size: 15px; line-height: 1.8; color: #000000;">If you need to make any changes or have questions about the events, feel free to reach out anytime.</p>
               
-              <p style="margin: 24px 0 0 0; font-size: 15px; color: #000000;">— Simon & Catherine</p>
+              <p style="margin: 24px 0 0 0; font-size: 15px; color: #000000;">With love,<br>Simon & Catherine</p>
             </td>
           </tr>
 
