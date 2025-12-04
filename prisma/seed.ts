@@ -4,7 +4,17 @@ import bcrypt from 'bcryptjs'
 const prisma = new PrismaClient()
 
 async function main() {
-    const email = 'admin@example.com'
+    // Delete old admin if exists
+    try {
+        await prisma.user.delete({
+            where: { email: 'admin@example.com' }
+        })
+        console.log('Deleted old admin user')
+    } catch (e) {
+        // Ignore if not found
+    }
+
+    const email = 'admin@sicalovestory.com'
     const password = 'SimonwedsCathy'
     const hashedPassword = await bcrypt.hash(password, 10)
 
