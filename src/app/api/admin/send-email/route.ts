@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 import { auth } from '@/auth';
 import { sendUpdateEmail, sendReminderEmail } from '@/lib/email';
-
-const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
     // Require authentication
