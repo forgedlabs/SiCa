@@ -1,11 +1,9 @@
 'use server'
 
 import { z } from 'zod'
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { auth, signIn, signOut } from '@/auth'
-
-const prisma = new PrismaClient()
 
 const GuestSchema = z.object({
     firstName: z.string().min(1, "First name is required"),

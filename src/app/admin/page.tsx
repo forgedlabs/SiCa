@@ -1,13 +1,12 @@
 import { auth } from "@/auth"
-import { PrismaClient, Guest } from "@prisma/client"
+import { Guest } from "@prisma/client"
+import prisma from "@/lib/prisma"
 import { LogoutButton } from "@/components/LogoutButton"
 import { AddGuestForm } from "@/components/AddGuestForm"
 import { DeleteGuestButton } from "@/components/DeleteGuestButton"
 import { GuestListTable } from "@/components/GuestListTable"
 import Link from "next/link"
 import { Send } from "lucide-react"
-
-const prisma = new PrismaClient()
 
 async function getStats() {
     const totalGuests = await prisma.guest.count()
