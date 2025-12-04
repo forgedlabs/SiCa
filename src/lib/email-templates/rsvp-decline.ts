@@ -37,11 +37,9 @@ export function generateRsvpDeclineEmail(data: RsvpDeclineData): string {
               
               <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">Dear ${firstName} ${lastName},</p>
               
-              <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">Thank you for taking the time to respond to our wedding invitation. While we are sorry you won't be able to join us on our special day, we truly appreciate you letting us know.</p>
-
-              <p style="margin: 0 0 32px 0; font-size: 15px; line-height: 1.8; color: #000000;">You will be in our thoughts, and we hope to celebrate with you soon.</p>
+              <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">Thank you for taking the time to send us your RSVP. We’re sorry to hear that you won’t be able to join us on 30 May 2026, but we completely understand. Life gets busy, plans shift, and timing isn’t always on our side.</p>
               
-              <p style="margin: 40px 0 0 0; font-size: 15px; color: #000000;">— Simon & Catherine</p>
+              <p style="margin: 40px 0 0 0; font-size: 15px; color: #000000;">With love,<br>Simon & Catherine</p>
             </td>
           </tr>
 
