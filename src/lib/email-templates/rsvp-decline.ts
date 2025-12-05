@@ -25,7 +25,7 @@ export function generateRsvpDeclineEmail(data: RsvpDeclineData): string {
           <!-- Logo & Header -->
           <tr>
             <td style="padding: 40px 40px 32px 40px; text-align: center; border-bottom: 1px solid #000000;">
-              <img src="${EMAIL_LOGO_BASE64}" alt="SICA" style="width: 120px; height: auto; margin-bottom: 24px;" />
+              <img src="https://i.imgur.com/HIuEHCC.jpeg" alt="SICA" style="width: 120px; height: auto; margin-bottom: 24px;" />
               <h1 style="margin: 0; font-family: Georgia, serif; font-size: 32px; font-weight: 400; color: #000000; letter-spacing: 0.1em; text-transform: uppercase;">Simon & Catherine</h1>
             </td>
           </tr>
