@@ -5,7 +5,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Loader2, Send, CheckCircle2, AlertCircle, ArrowLeft } from "lucide-react"
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+    DialogFooter,
+} from "@/components/ui/dialog"
+import { Loader2, Send, CheckCircle2, AlertCircle, ArrowLeft, Mail } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 export default function NotificationsPage() {
@@ -22,6 +30,8 @@ export default function NotificationsPage() {
     const [loading, setLoading] = useState(false)
     const [sending, setSending] = useState(false)
     const [result, setResult] = useState<any>(null)
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false)
+    const [validationError, setValidationError] = useState<string | null>(null)
 
     // Fetch guest count based on current filters
     useEffect(() => {
@@ -53,27 +63,28 @@ export default function NotificationsPage() {
     }, [recipientFilter])
 
     const handleSend = async () => {
+        // Validate inputs
         if (emailType === 'update' && (!subject || !message)) {
-            alert('Please enter both subject and message')
+            setValidationError('Please enter both subject and message')
             return
         }
 
         if (emailType === 'reminder' && reminderType === 'custom' && !message) {
-            alert('Please enter a custom message for the reminder')
+            setValidationError('Please enter a custom message for the reminder')
             return
         }
 
         if (guestCount === 0) {
-            alert('No recipients match the selected filters')
+            setValidationError('No recipients match the selected filters')
             return
         }
 
-        const confirmed = confirm(
-            `Are you sure you want to send this email to ${guestCount} guest${guestCount !== 1 ? 's' : ''}?`
-        )
+        setValidationError(null)
+        setShowConfirmDialog(true)
+    }
 
-        if (!confirmed) return
-
+    const confirmSend = async () => {
+        setShowConfirmDialog(false)
         setSending(true)
         setResult(null)
 
@@ -241,8 +252,8 @@ export default function NotificationsPage() {
                     {/* Result Message */}
                     {result && (
                         <div className={`mb-8 p-4 border ${result.success
-                                ? 'border-black bg-gray-50'
-                                : 'border-black bg-gray-50'
+                            ? 'border-black bg-gray-50'
+                            : 'border-black bg-gray-50'
                             }`}>
                             <div className="flex items-start gap-3">
                                 {result.success ? (
@@ -269,6 +280,16 @@ export default function NotificationsPage() {
                         </div>
                     )}
 
+                    {/* Validation Error */}
+                    {validationError && (
+                        <div className="mb-8 p-4 border border-black bg-gray-50">
+                            <div className="flex items-start gap-3">
+                                <AlertCircle className="h-5 w-5 mt-0.5" />
+                                <p className="text-sm">{validationError}</p>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Send Button */}
                     <div className="flex justify-end pt-8 border-t border-gray-200">
                         <Button
@@ -283,6 +304,43 @@ export default function NotificationsPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Confirmation Dialog */}
+            <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+                <DialogContent className="sm:max-w-md border-2 border-black rounded-none">
+                    <DialogHeader>
+                        <div className="flex items-center justify-center mb-4">
+                            <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center">
+                                <Mail className="w-8 h-8 text-white" />
+                            </div>
+                        </div>
+                        <DialogTitle className="text-center font-serif text-2xl">
+                            Confirm Send
+                        </DialogTitle>
+                        <DialogDescription className="text-center text-gray-600 pt-2">
+                            You are about to send this email to <strong className="text-black">{guestCount}</strong> {guestCount === 1 ? 'guest' : 'guests'}.
+                            <br />
+                            <span className="text-sm mt-2 block">This action cannot be undone.</span>
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter className="flex gap-3 sm:justify-center mt-6">
+                        <Button
+                            variant="outline"
+                            onClick={() => setShowConfirmDialog(false)}
+                            className="flex-1 border-black rounded-none uppercase tracking-widest text-xs py-5"
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={confirmSend}
+                            className="flex-1 bg-black text-white rounded-none uppercase tracking-widest text-xs py-5 hover:bg-gray-800"
+                        >
+                            <Send className="mr-2 h-4 w-4" />
+                            Send Emails
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }
