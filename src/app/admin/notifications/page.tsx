@@ -125,7 +125,7 @@ export default function NotificationsPage() {
                 <div className="mb-12">
                     <button
                         onClick={() => router.push('/admin')}
-                        className="flex items-center gap-2 text-sm uppercase tracking-widest mb-8 hover:opacity-60 transition-opacity"
+                        className="inline-flex items-center gap-2 px-4 py-2 text-sm uppercase tracking-widest mb-8 border border-black hover:bg-black hover:text-white transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         Back to Admin
