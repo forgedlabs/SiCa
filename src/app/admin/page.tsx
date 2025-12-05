@@ -54,9 +54,17 @@ async function getLocationStats() {
         select: { city: true, state: true }
     })
 
+    // Helper to normalize location strings (trim whitespace, remove trailing punctuation)
+    const normalize = (str: string | null) => {
+        if (!str) return null
+        return str.trim().replace(/[,.\s]+$/, '').trim()
+    }
+
     const locationCounts: Record<string, number> = {}
     guests.forEach(guest => {
-        const location = [guest.city, guest.state].filter(Boolean).join(', ') || 'Not specified'
+        const city = normalize(guest.city)
+        const country = normalize(guest.state)
+        const location = [city, country].filter(Boolean).join(', ') || 'Not specified'
         locationCounts[location] = (locationCounts[location] || 0) + 1
     })
 
