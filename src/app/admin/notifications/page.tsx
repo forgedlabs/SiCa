@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog"
 import { Loader2, Send, CheckCircle2, AlertCircle, ArrowLeft, Mail } from "lucide-react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 export default function NotificationsPage() {
     const router = useRouter()
@@ -123,13 +124,13 @@ export default function NotificationsPage() {
             <div className="max-w-4xl mx-auto px-6 py-12">
                 {/* Header */}
                 <div className="mb-12">
-                    <button
-                        onClick={() => router.push('/admin')}
+                    <Link
+                        href="/admin"
                         className="inline-flex items-center gap-2 px-4 py-2 text-sm uppercase tracking-widest mb-8 border border-black hover:bg-black hover:text-white transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         Back to Admin
-                    </button>
+                    </Link>
                     <h1 className="font-serif text-4xl mb-2 uppercase tracking-wider">Send Notifications</h1>
                     <p className="text-sm uppercase tracking-widest text-gray-500">Compose and send email updates to your wedding guests</p>
                 </div>
