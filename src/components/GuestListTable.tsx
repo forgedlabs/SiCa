@@ -77,8 +77,8 @@ export function GuestListTable({ initialGuests }: { initialGuests: Guest[] }) {
                                     <TableCell className="p-4 text-gray-600 uppercase tracking-wider text-xs">{guest.guestRelationship || '-'}</TableCell>
                                     <TableCell className="p-4">
                                         <span className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium uppercase tracking-wider ${guest.rsvpStatus === 'ACCEPTED' ? 'text-green-600 bg-green-50' :
-                                                guest.rsvpStatus === 'DECLINED' ? 'text-red-600 bg-red-50' :
-                                                    'text-yellow-600 bg-yellow-50'
+                                            guest.rsvpStatus === 'DECLINED' ? 'text-red-600 bg-red-50' :
+                                                'text-yellow-600 bg-yellow-50'
                                             }`}>
                                             {guest.rsvpStatus}
                                         </span>
@@ -86,13 +86,13 @@ export function GuestListTable({ initialGuests }: { initialGuests: Guest[] }) {
                                     <TableCell className="p-4 text-gray-500 text-sm">
                                         <div className="flex flex-col gap-1">
                                             {guest.mealPreference && (
-                                                <span className="text-xs"><span className="uppercase tracking-wider text-gray-400">Meal:</span> {guest.mealPreference}</span>
+                                                <span className="text-xs"><span className="uppercase tracking-wider text-gray-400">Ceremony:</span> {guest.mealPreference}</span>
                                             )}
                                             {guest.dietaryNotes && (
                                                 <span className="text-xs"><span className="uppercase tracking-wider text-gray-400">Dietary:</span> {guest.dietaryNotes}</span>
                                             )}
                                             {(guest.city || guest.state) && (
-                                                <span className="text-xs"><span className="uppercase tracking-wider text-gray-400">Loc:</span> {[guest.city, guest.state].filter(Boolean).join(', ')}</span>
+                                                <span className="text-xs"><span className="uppercase tracking-wider text-gray-400">Location:</span> {[guest.city, guest.state].filter(Boolean).join(', ')}</span>
                                             )}
                                         </div>
                                     </TableCell>
