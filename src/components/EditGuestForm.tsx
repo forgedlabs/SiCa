@@ -13,7 +13,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-
+import { COUNTRIES } from "@/lib/countries"
 import { Pencil } from 'lucide-react'
 
 interface Guest {
@@ -165,14 +165,19 @@ export function EditGuestForm({ guest }: { guest: Guest }) {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="state" className="uppercase text-xs tracking-widest text-gray-500">
-                                State
+                                Country
                             </Label>
-                            <Input
+                            <select
                                 id="state"
                                 name="state"
                                 defaultValue={guest.state || ''}
-                                className="border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black"
-                            />
+                                className="w-full border-0 border-b border-gray-200 bg-transparent py-2 text-sm focus:ring-0 focus:border-black rounded-none"
+                            >
+                                <option value="">Select country</option>
+                                {COUNTRIES.map((country) => (
+                                    <option key={country} value={country}>{country}</option>
+                                ))}
+                            </select>
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="zip" className="uppercase text-xs tracking-widest text-gray-500">

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-
+import { COUNTRIES } from "@/lib/countries"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Loader2, Check } from "lucide-react"
 
@@ -70,7 +70,7 @@ export default function RSVPPage() {
 
             if (!formData.address.trim()) newErrors.address = "Address is required"
             if (!formData.city.trim()) newErrors.city = "City is required"
-            if (!formData.state.trim()) newErrors.state = "State is required"
+            if (!formData.state.trim()) newErrors.state = "Country is required"
 
             if (!formData.zip.trim()) {
                 newErrors.zip = "Postal code is required"
@@ -280,15 +280,22 @@ export default function RSVPPage() {
                                     {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city}</p>}
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="state" className="uppercase text-xs tracking-widest text-gray-500">State/Province</Label>
-                                    <Input
+                                    <Label htmlFor="state" className="uppercase text-xs tracking-widest text-gray-500">Country</Label>
+                                    <select
                                         id="state"
                                         name="state"
                                         value={formData.state}
-                                        onChange={handleChange}
-                                        placeholder="NH"
-                                        className="border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder:text-gray-300"
-                                    />
+                                        onChange={(e) => {
+                                            setFormData(prev => ({ ...prev, state: e.target.value }))
+                                            if (errors.state) setErrors(prev => ({ ...prev, state: '' }))
+                                        }}
+                                        className="w-full border-0 border-b border-gray-200 bg-transparent py-2 text-sm focus:ring-0 focus:border-black rounded-none"
+                                    >
+                                        <option value="" disabled>Select country</option>
+                                        {COUNTRIES.map((country) => (
+                                            <option key={country} value={country}>{country}</option>
+                                        ))}
+                                    </select>
                                     {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state}</p>}
                                 </div>
                                 <div className="space-y-2">

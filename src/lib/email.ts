@@ -6,7 +6,7 @@ import { generateReminderEmail } from './email-templates/reminder';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = process.env.WEDDING_EMAIL_FROM || 'onboarding@resend.dev';
+const FROM_EMAIL = process.env.WEDDING_EMAIL_FROM || 'rsvp@sicalovestory.com';
 const FROM_NAME = process.env.WEDDING_EMAIL_FROM_NAME || 'Simon & Catherine';
 
 interface Guest {

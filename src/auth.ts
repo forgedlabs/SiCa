@@ -7,10 +7,13 @@ import { z } from "zod"
 
 async function getUser(email: string) {
     try {
+        console.log('[AUTH] Fetching user:', email)
         const user = await prisma.user.findUnique({ where: { email } })
+        console.log('[AUTH] User fetched successfully:', user ? 'Found' : 'Not found')
         return user
     } catch (error) {
-        console.error('Failed to fetch user:', error)
+        console.error('[AUTH] Failed to fetch user:', error)
+        console.error('[AUTH] Error details:', JSON.stringify(error, null, 2))
         throw new Error('Failed to fetch user.')
     }
 }
