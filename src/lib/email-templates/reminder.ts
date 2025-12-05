@@ -51,7 +51,9 @@ export function generateReminderEmail(data: ReminderData): string {
           <tr>
             <td style="padding: 40px 40px 32px 40px; text-align: center; border-bottom: 1px solid #000000;">
               <img src="https://i.imgur.com/HIuEHCC.jpeg" alt="SICA" style="width: 120px; height: auto; margin-bottom: 24px;" />
-              <h1 style="margin: 0; font-family: Georgia, serif; font-size: 32px; font-weight: 400; color: #000000; letter-spacing: 0.1em; text-transform: uppercase;">Simon & Catherine</h1>
+              <p style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 36px; font-weight: 400; color: #000000; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.2;">SIMON</p>
+              <p style="margin: 8px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; font-weight: 400; color: #000000; font-style: italic;">&amp;</p>
+              <p style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 36px; font-weight: 400; color: #000000; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.2;">CATHERINE</p>
             </td>
           </tr>
 
