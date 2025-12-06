@@ -42,19 +42,13 @@ export default function PasswordPage() {
                 {/* Logo */}
                 <div className="mb-8">
                     <Image
-                        src="/hero/1.jpg"
-                        alt="Simon & Catherine"
-                        width={120}
-                        height={120}
-                        className="mx-auto rounded-full object-cover"
+                        src="/sica-logo.jpg"
+                        alt="Simon & Catherine - #SICA 30.05.2026"
+                        width={300}
+                        height={400}
+                        className="mx-auto"
+                        priority
                     />
-                </div>
-
-                {/* Names */}
-                <div className="mb-8">
-                    <p className="font-serif text-3xl tracking-widest uppercase">Simon</p>
-                    <p className="font-serif text-2xl my-2">&</p>
-                    <p className="font-serif text-3xl tracking-widest uppercase">Catherine</p>
                 </div>
 
                 {/* Password Form */}
