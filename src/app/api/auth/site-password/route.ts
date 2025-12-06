@@ -3,7 +3,6 @@ import { cookies } from "next/headers"
 
 const SITE_PASSWORD = process.env.SITE_PASSWORD || "SICA2026"
 const COOKIE_NAME = "site_access"
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days
 
 export async function POST(request: Request) {
     try {
@@ -11,11 +10,11 @@ export async function POST(request: Request) {
 
         if (password === SITE_PASSWORD) {
             const cookieStore = await cookies()
+            // Session cookie (no maxAge = expires when browser closes)
             cookieStore.set(COOKIE_NAME, "granted", {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "lax",
-                maxAge: COOKIE_MAX_AGE,
                 path: "/"
             })
 
