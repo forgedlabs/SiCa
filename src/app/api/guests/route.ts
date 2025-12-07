@@ -13,6 +13,8 @@ export async function GET(request: Request) {
         const { searchParams } = new URL(request.url);
         const rsvpStatus = searchParams.get('rsvpStatus');
         const guestRelationship = searchParams.get('guestRelationship');
+        const mealPreference = searchParams.get('mealPreference');
+        const state = searchParams.get('state');
 
         // Build where clause based on query params
         const whereClause: any = {};
@@ -23,6 +25,14 @@ export async function GET(request: Request) {
 
         if (guestRelationship && guestRelationship !== 'all') {
             whereClause.guestRelationship = guestRelationship;
+        }
+
+        if (mealPreference && mealPreference !== 'all') {
+            whereClause.mealPreference = mealPreference;
+        }
+
+        if (state && state !== 'all') {
+            whereClause.state = state;
         }
 
         const guests = await prisma.guest.findMany({

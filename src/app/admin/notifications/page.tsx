@@ -25,14 +25,38 @@ export default function NotificationsPage() {
     const [reminderType, setReminderType] = useState<'one_month' | 'two_weeks' | 'one_week' | 'custom'>('one_month')
     const [recipientFilter, setRecipientFilter] = useState({
         rsvpStatus: 'all',
-        guestRelationship: 'all'
+        guestRelationship: 'all',
+        ceremonyAttendance: 'all',
+        location: 'all'
     })
     const [guestCount, setGuestCount] = useState(0)
+    const [locations, setLocations] = useState<string[]>([])
     const [loading, setLoading] = useState(false)
     const [sending, setSending] = useState(false)
     const [result, setResult] = useState<any>(null)
     const [showConfirmDialog, setShowConfirmDialog] = useState(false)
     const [validationError, setValidationError] = useState<string | null>(null)
+
+    // Fetch available locations on mount
+    useEffect(() => {
+        async function fetchLocations() {
+            try {
+                const res = await fetch('/api/guests')
+                if (res.ok) {
+                    const guests = await res.json()
+                    const uniqueLocations = [...new Set(
+                        guests
+                            .filter((g: any) => g.state)
+                            .map((g: any) => g.state.trim())
+                    )].sort() as string[]
+                    setLocations(uniqueLocations)
+                }
+            } catch (error) {
+                console.error('Error fetching locations:', error)
+            }
+        }
+        fetchLocations()
+    }, [])
 
     // Fetch guest count based on current filters
     useEffect(() => {
@@ -45,6 +69,12 @@ export default function NotificationsPage() {
                 }
                 if (recipientFilter.guestRelationship !== 'all') {
                     params.set('guestRelationship', recipientFilter.guestRelationship)
+                }
+                if (recipientFilter.ceremonyAttendance !== 'all') {
+                    params.set('mealPreference', recipientFilter.ceremonyAttendance)
+                }
+                if (recipientFilter.location !== 'all') {
+                    params.set('state', recipientFilter.location)
                 }
 
                 const res = await fetch(`/api/guests?${params.toString()}`)
@@ -237,6 +267,36 @@ export default function NotificationsPage() {
                                     <option value="GROOM">Groom's Guests</option>
                                     <option value="BRIDE">Bride's Guests</option>
                                     <option value="BOTH">Both</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <Label className="text-xs uppercase tracking-widest mb-2 block">Ceremony Attendance</Label>
+                                <select
+                                    value={recipientFilter.ceremonyAttendance}
+                                    onChange={(e) => setRecipientFilter({ ...recipientFilter, ceremonyAttendance: e.target.value })}
+                                    className="w-full p-3 border border-black focus:outline-none"
+                                >
+                                    <option value="all">All Ceremonies</option>
+                                    <option value="both">Both Ceremonies</option>
+                                    <option value="traditional">Traditional Only</option>
+                                    <option value="reception">Reception Only</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <Label className="text-xs uppercase tracking-widest mb-2 block">Location (Country)</Label>
+                                <select
+                                    value={recipientFilter.location}
+                                    onChange={(e) => setRecipientFilter({ ...recipientFilter, location: e.target.value })}
+                                    className="w-full p-3 border border-black focus:outline-none"
+                                >
+                                    <option value="all">All Locations</option>
+                                    {locations.map((loc) => (
+                                        <option key={loc} value={loc}>{loc}</option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
