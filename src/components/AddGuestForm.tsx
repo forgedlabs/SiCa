@@ -14,6 +14,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { COUNTRIES } from "@/lib/countries"
 
 function SubmitButton() {
     const { pending } = useFormStatus()
@@ -118,7 +119,7 @@ export function AddGuestForm() {
                         />
                     </div>
 
-                    {/* City, State, Zip */}
+                    {/* City, Country, Zip */}
                     <div className="grid grid-cols-3 gap-6">
                         <div className="space-y-2">
                             <Label htmlFor="city" className="uppercase text-xs tracking-widest text-gray-500">
@@ -132,13 +133,18 @@ export function AddGuestForm() {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="state" className="uppercase text-xs tracking-widest text-gray-500">
-                                State
+                                Country
                             </Label>
-                            <Input
+                            <select
                                 id="state"
                                 name="state"
-                                className="border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black"
-                            />
+                                className="w-full border-0 border-b border-gray-200 bg-transparent py-2 text-sm focus:ring-0 focus:border-black rounded-none"
+                            >
+                                <option value="">Select country</option>
+                                {COUNTRIES.map((country) => (
+                                    <option key={country} value={country}>{country}</option>
+                                ))}
+                            </select>
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="zip" className="uppercase text-xs tracking-widest text-gray-500">
@@ -150,6 +156,23 @@ export function AddGuestForm() {
                                 className="border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black"
                             />
                         </div>
+                    </div>
+
+                    {/* Ceremony Attendance */}
+                    <div className="space-y-2">
+                        <Label htmlFor="mealPreference" className="uppercase text-xs tracking-widest text-gray-500">
+                            Ceremony Attendance
+                        </Label>
+                        <select
+                            id="mealPreference"
+                            name="mealPreference"
+                            className="w-full border-0 border-b border-gray-200 bg-transparent py-2 text-sm focus:ring-0 focus:border-black rounded-none"
+                        >
+                            <option value="">Select attendance</option>
+                            <option value="both">Both Ceremonies</option>
+                            <option value="traditional">Traditional Ceremony Only</option>
+                            <option value="reception">Ceremonial Exchange & Reception Only</option>
+                        </select>
                     </div>
 
                     {/* Relationship */}
