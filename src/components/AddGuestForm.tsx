@@ -196,6 +196,36 @@ export function AddGuestForm() {
                         </RadioGroup>
                     </div>
 
+                    {/* RSVP Status */}
+                    <div className="space-y-2">
+                        <Label htmlFor="rsvpStatus" className="uppercase text-xs tracking-widest text-gray-500">
+                            RSVP Status
+                        </Label>
+                        <select
+                            id="rsvpStatus"
+                            name="rsvpStatus"
+                            defaultValue="PENDING"
+                            className="w-full border-0 border-b border-gray-200 bg-transparent py-2 text-sm focus:ring-0 focus:border-black rounded-none"
+                        >
+                            <option value="PENDING">Pending</option>
+                            <option value="ACCEPTED">Accepted</option>
+                            <option value="DECLINED">Declined</option>
+                        </select>
+                    </div>
+
+                    {/* Dietary Notes */}
+                    <div className="space-y-2">
+                        <Label htmlFor="dietaryNotes" className="uppercase text-xs tracking-widest text-gray-500">
+                            Dietary Notes
+                        </Label>
+                        <Input
+                            id="dietaryNotes"
+                            name="dietaryNotes"
+                            placeholder="Allergies, preferences, etc."
+                            className="border-0 border-b border-gray-200 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black"
+                        />
+                    </div>
+
                     {state.message && (
                         <p className="text-sm text-red-500">{state.message}</p>
                     )}
