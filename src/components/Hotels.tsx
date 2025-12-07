@@ -16,6 +16,11 @@ const hotels = [
         name: "Ozo Hotel",
         address: "Karspeldreef 2, 1101 CJ Amsterdam, Netherlands",
         link: "https://www.ozo-hotels.com/hotels/ozo-hotels-arena-amsterdam#book"
+    },
+    {
+        name: "Joy Hotel Amsterdam",
+        address: "Hullenbergweg 385, 1101 CS Amsterdam, Netherlands",
+        link: "https://www.joyhotel.nl/kamers"
     }
 ]
 
