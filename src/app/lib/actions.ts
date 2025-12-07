@@ -32,6 +32,9 @@ export async function addGuest(prevState: any, formData: FormData) {
         email: formData.get('email'),
         phone: formData.get('phone'),
         guestRelationship: formData.get('guestRelationship'),
+        rsvpStatus: formData.get('rsvpStatus') || 'PENDING',
+        mealPreference: formData.get('mealPreference'),
+        dietaryNotes: formData.get('dietaryNotes'),
         address: formData.get('address'),
         city: formData.get('city'),
         state: formData.get('state'),
@@ -52,12 +55,23 @@ export async function addGuest(prevState: any, formData: FormData) {
             return { message: 'User ID not found in session' }
         }
 
-        await prisma.guest.create({
+        const guest = await prisma.guest.create({
             data: {
                 ...validatedFields.data,
                 userId: userId,
             },
         })
+
+        // Send confirmation email if guest has email and is ACCEPTED
+        if (guest.email && guest.rsvpStatus === 'ACCEPTED') {
+            try {
+                const { sendRsvpConfirmation } = await import('@/lib/email')
+                await sendRsvpConfirmation(guest, 'ACCEPTED')
+            } catch (emailError) {
+                console.error('Failed to send confirmation email:', emailError)
+                // Don't fail the whole operation if email fails
+            }
+        }
 
         revalidatePath('/admin')
         return { message: 'Guest added successfully' }
