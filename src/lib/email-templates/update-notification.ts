@@ -20,8 +20,9 @@ export function generateUpdateEmail(data: UpdateNotificationData): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${subject}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #ffffff; color: #000000;">
+<body style="margin: 0; padding: 0; font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; background-color: #ffffff; color: #000000;">
   <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #ffffff;">
     <tr>
       <td align="center" style="padding: 40px 20px;">
