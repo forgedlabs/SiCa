@@ -45,6 +45,9 @@ model Guest {
   rsvpStatus        String   @default("PENDING") // PENDING, ACCEPTED, DECLINED
   mealPreference    String?
   dietaryNotes      String?
+  hasPlusOne        Boolean  @default(false)
+  plusOneName       String?
+  plusOneConfirmed  Boolean  @default(false)
   partyId           String?  // To group families/couples
   tableId           String?
   table             Table?   @relation(fields: [tableId], references: [id])

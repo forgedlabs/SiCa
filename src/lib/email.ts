@@ -3,6 +3,7 @@ import { generateRsvpConfirmationEmail } from './email-templates/rsvp-confirmati
 import { generateRsvpDeclineEmail } from './email-templates/rsvp-decline';
 import { generateUpdateEmail } from './email-templates/update-notification';
 import { generateReminderEmail } from './email-templates/reminder';
+import { generatePlusOneFollowupEmail } from './email-templates/plus-one-followup';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -193,4 +194,38 @@ export async function sendReminderEmail(
     }
 
     return { successCount, failureCount, results };
+}
+
+/**
+ * Send plus one follow-up email to a guest
+ */
+export async function sendPlusOneFollowup(
+    guest: { firstName: string; lastName: string; email: string }
+): Promise<EmailResult> {
+    try {
+        const htmlContent = generatePlusOneFollowupEmail({
+            firstName: guest.firstName,
+            lastName: guest.lastName,
+        });
+
+        const { data, error } = await resend.emails.send({
+            from: `${FROM_NAME} <${FROM_EMAIL}>`,
+            to: guest.email,
+            subject: 'Plus One Details - Simon & Catherine Wedding',
+            html: htmlContent,
+        });
+
+        if (error) {
+            console.error('Resend error:', error);
+            return { success: false, error: error.message };
+        }
+
+        return { success: true, messageId: data?.id };
+    } catch (error) {
+        console.error('Error sending plus one follow-up:', error);
+        return {
+            success: false,
+            error: error instanceof Error ? error.message : 'Unknown error',
+        };
+    }
 }

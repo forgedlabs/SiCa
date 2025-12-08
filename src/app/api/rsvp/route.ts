@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { sendRsvpConfirmation } from '@/lib/email';
+import { sendRsvpConfirmation, sendPlusOneFollowup } from '@/lib/email';
 
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { guestId, rsvpStatus, mealPreference, dietaryNotes } = body;
+        const { guestId, rsvpStatus, mealPreference, dietaryNotes, hasPlusOne } = body;
 
         if (!guestId || !rsvpStatus) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -17,6 +17,7 @@ export async function POST(request: Request) {
                 rsvpStatus,
                 mealPreference,
                 dietaryNotes,
+                hasPlusOne: hasPlusOne || false,
                 emailConfirmationSent: false, // Will be updated after email send
                 lastEmailSentAt: new Date()
             }
@@ -34,6 +35,18 @@ export async function POST(request: Request) {
                     });
                 } else {
                     console.error(`Failed to send RSVP email to ${updatedGuest.email}:`, result.error);
+                }
+
+                // Send plus one follow-up if guest is bringing a plus one
+                if (hasPlusOne && rsvpStatus === 'ACCEPTED') {
+                    const plusOneResult = await sendPlusOneFollowup({
+                        firstName: updatedGuest.firstName,
+                        lastName: updatedGuest.lastName,
+                        email: updatedGuest.email
+                    });
+                    if (!plusOneResult.success) {
+                        console.error(`Failed to send plus one email to ${updatedGuest.email}:`, plusOneResult.error);
+                    }
                 }
             } catch (error) {
                 console.error('Email send error:', error);

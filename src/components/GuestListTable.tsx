@@ -21,6 +21,9 @@ interface Guest {
     rsvpStatus: string
     mealPreference: string | null
     dietaryNotes: string | null
+    hasPlusOne?: boolean
+    plusOneName?: string | null
+    plusOneConfirmed?: boolean
 }
 
 export function GuestListTable({ initialGuests }: { initialGuests: Guest[] }) {
@@ -71,7 +74,12 @@ export function GuestListTable({ initialGuests }: { initialGuests: Guest[] }) {
                         ) : (
                             filteredGuests.map((guest) => (
                                 <TableRow key={guest.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                                    <TableCell className="p-4 font-serif text-lg">{guest.firstName} {guest.lastName}</TableCell>
+                                    <TableCell className="p-4 font-serif text-lg">
+                                        {guest.firstName} {guest.lastName}
+                                        {guest.hasPlusOne && (
+                                            <span className="ml-2 inline-flex items-center px-2 py-0.5 text-xs font-medium uppercase tracking-wider text-purple-600 bg-purple-50 rounded">+1</span>
+                                        )}
+                                    </TableCell>
                                     <TableCell className="p-4 text-gray-600">{guest.email}</TableCell>
                                     <TableCell className="p-4 text-gray-600">{guest.phone || '-'}</TableCell>
                                     <TableCell className="p-4 text-gray-600 uppercase tracking-wider text-xs">{guest.guestRelationship || '-'}</TableCell>

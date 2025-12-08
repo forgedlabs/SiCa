@@ -155,7 +155,8 @@ export default function RSVPPage() {
                     guestId: guest.id,
                     rsvpStatus: formData.attending === 'yes' ? 'ACCEPTED' : 'DECLINED',
                     mealPreference: formData.meal,
-                    dietaryNotes: formData.dietary
+                    dietaryNotes: formData.dietary,
+                    hasPlusOne: formData.plusOne
                 })
             })
 
