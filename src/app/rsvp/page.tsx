@@ -15,6 +15,7 @@ export default function RSVPPage() {
     const router = useRouter()
     const [step, setStep] = useState(1)
     const [loading, setLoading] = useState(false)
+    const [errorDialog, setErrorDialog] = useState({ show: false, message: "" })
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -168,11 +169,10 @@ export default function RSVPPage() {
             setStep(6) // Success step
         } catch (error) {
             console.error(error)
-            if (error instanceof Error) {
-                alert(error.message)
-            } else {
-                alert('Something went wrong. Please try again.')
-            }
+            setErrorDialog({
+                show: true,
+                message: "We're having trouble processing your RSVP. Please try again in a moment, or contact us if the issue persists."
+            })
         } finally {
             setLoading(false)
         }
@@ -467,6 +467,29 @@ export default function RSVPPage() {
                     />
                 </div>
             </div>
+
+            {/* Error Dialog */}
+            {errorDialog.show && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 animate-in fade-in">
+                    <div className="bg-white max-w-md w-full p-8 shadow-xl animate-in zoom-in slide-in-from-bottom-4">
+                        <div className="text-center">
+                            <div className="mx-auto w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                                <svg className="w-6 h-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <h3 className="font-serif text-2xl mb-3">Oops!</h3>
+                            <p className="text-gray-600 mb-6 leading-relaxed">{errorDialog.message}</p>
+                            <Button
+                                onClick={() => setErrorDialog({ show: false, message: "" })}
+                                className="bg-black text-white hover:bg-gray-800 rounded-none px-8 py-3 uppercase tracking-widest text-xs w-full"
+                            >
+                                Got it
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
