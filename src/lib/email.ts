@@ -62,6 +62,9 @@ export async function sendRsvpConfirmation(
             to: guest.email,
             subject,
             html: htmlContent,
+            headers: {
+                'List-Unsubscribe': '<mailto:noreply@sicalovestory.com?subject=unsubscribe>',
+            },
         });
 
         if (error) {
@@ -111,6 +114,9 @@ export async function sendUpdateEmail(
                 to: guest.email,
                 subject: `${subject} - Simon & Catherine Wedding`,
                 html: htmlContent,
+                headers: {
+                    'List-Unsubscribe': '<mailto:noreply@sicalovestory.com?subject=unsubscribe>',
+                },
             });
 
             if (error) {
@@ -214,6 +220,9 @@ export async function sendPlusOneFollowup(
             to: guest.email,
             subject: 'Plus One Details - Simon & Catherine Wedding',
             html: htmlContent,
+            headers: {
+                'List-Unsubscribe': '<mailto:noreply@sicalovestory.com?subject=unsubscribe>',
+            },
         });
 
         if (error) {
