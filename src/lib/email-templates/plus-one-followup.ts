@@ -1,10 +1,12 @@
 interface PlusOneFollowupData {
   firstName: string;
   lastName: string;
+  token: string;
 }
 
 export function generatePlusOneFollowupEmail(data: PlusOneFollowupData): string {
-  const { firstName, lastName } = data;
+  const { firstName, lastName, token } = data;
+  const formUrl = `https://sicalovestory.com/plus-one?token=${token}`;
 
   return `
 <!DOCTYPE html>
@@ -40,20 +42,19 @@ export function generatePlusOneFollowupEmail(data: PlusOneFollowupData): string 
               
               <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">Thank you for your RSVP! We're excited that you'll be joining us and bringing a plus one.</p>
               
-              <p style="margin: 0 0 16px 0; font-size: 15px; line-height: 1.8; color: #000000;"><strong>Please reply to this email</strong> with your plus one's details using this exact format:</p>
+              <p style="margin: 0 0 32px 0; font-size: 15px; line-height: 1.8; color: #000000;">Please click the button below to provide your plus one's details:</p>
 
-              <div style="background-color: #f8f8f8; padding: 24px; margin: 24px 0; border-left: 4px solid #000000; font-family: 'Courier New', monospace;">
-                <p style="margin: 0 0 12px 0; font-size: 14px; color: #000000;">Name: [Full Name]</p>
-                <p style="margin: 0 0 12px 0; font-size: 14px; color: #000000;">Ceremony: [Both / Traditional Only / Reception Only]</p>
-                <p style="margin: 0; font-size: 14px; color: #000000;">Dietary: [Any restrictions or None]</p>
-              </div>
+              <!-- CTA Button -->
+              <table role="presentation" style="margin: 0 auto 32px; border-collapse: collapse;">
+                <tr>
+                  <td align="center" style="padding: 16px 48px; background-color: #000000;">
+                    <a href="${formUrl}" style="color: #ffffff; text-decoration: none; font-family: 'Playfair Display', Georgia, serif; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;">Add Plus One Details</a>
+                  </td>
+                </tr>
+              </table>
 
-              <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 1.6; color: #666666; font-style: italic;">Example reply:<br>
-              Name: Jane Smith<br>
-              Ceremony: Both<br>
-              Dietary: Vegetarian</p>
-
-              <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">Our system will automatically process your reply and confirm the details.</p>
+              <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 1.6; color: #666666; text-align: center;">Or copy this link:<br>
+              <a href="${formUrl}" style="color: #666666; word-break: break-all; font-size: 12px;">${formUrl}</a></p>
 
               <p style="margin: 40px 0 0 0; font-size: 15px; color: #000000;">With love,<br>Simon & Catherine</p>
             </td>

@@ -200,12 +200,13 @@ export async function sendReminderEmail(
  * Send plus one follow-up email to a guest
  */
 export async function sendPlusOneFollowup(
-    guest: { firstName: string; lastName: string; email: string }
+    guest: { firstName: string; lastName: string; email: string; token: string }
 ): Promise<EmailResult> {
     try {
         const htmlContent = generatePlusOneFollowupEmail({
             firstName: guest.firstName,
             lastName: guest.lastName,
+            token: guest.token
         });
 
         const { data, error } = await resend.emails.send({
