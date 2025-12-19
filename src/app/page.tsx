@@ -87,11 +87,11 @@ export default function Home() {
                 <p className="text-gray-500 uppercase tracking-widest text-xs">Saturday, May 30 • 9:00 - 12:30</p>
               </div>
               <div className="space-y-1 text-gray-600 text-center">
-                <p className="font-medium">Yaklkaf Events</p>
+                <p className="font-medium">Yakhlaf Events</p>
                 <p className="text-sm">Bloemendalerweg 50</p>
                 <p className="text-sm">1382 KS Weesp, The Netherlands</p>
                 <Link
-                  href="https://www.google.com/maps/search/?api=1&query=Yaklkaf+Events+Bloemendalerweg+50+1382+KS+Weesp+The+Netherlands"
+                  href="https://www.google.com/maps/search/?api=1&query=Yakhlaf+Events+Bloemendalerweg+50+1382+KS+Weesp+The+Netherlands"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center mt-2 text-black hover:text-gray-600 transition-colors"
