@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Loader2, Check } from "lucide-react"
 
-export default function PlusOnePage() {
+function PlusOneForm() {
     const searchParams = useSearchParams()
     const router = useRouter()
     const token = searchParams.get('token')
@@ -239,5 +239,17 @@ export default function PlusOnePage() {
                 </form>
             </div>
         </div>
+    )
+}
+
+export default function PlusOnePage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-white flex items-center justify-center">
+                <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+            </div>
+        }>
+            <PlusOneForm />
+        </Suspense>
     )
 }
