@@ -39,6 +39,8 @@ export async function addGuest(prevState: any, formData: FormData) {
         city: formData.get('city'),
         state: formData.get('state'),
         zip: formData.get('zip'),
+        hasPlusOne: formData.get('hasPlusOne') === 'on',
+        plusOneName: formData.get('plusOneName'),
     })
 
     if (!validatedFields.success) {

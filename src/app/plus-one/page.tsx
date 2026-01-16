@@ -19,6 +19,7 @@ function PlusOneForm() {
     const [valid, setValid] = useState(false)
     const [guestName, setGuestName] = useState("")
     const [submitted, setSubmitted] = useState(false)
+    const [alreadySubmitted, setAlreadySubmitted] = useState(false)
 
     const [formData, setFormData] = useState({
         plusOneName: "",
@@ -41,6 +42,9 @@ function PlusOneForm() {
                     const data = await res.json()
                     setValid(true)
                     setGuestName(`${data.firstName} ${data.lastName}`)
+                    if (data.alreadySubmitted) {
+                        setAlreadySubmitted(true)
+                    }
                 } else {
                     setValid(false)
                 }
@@ -123,6 +127,30 @@ function PlusOneForm() {
                     />
                     <h1 className="font-serif text-3xl mb-4">Invalid Link</h1>
                     <p className="text-gray-600 mb-8">This link is invalid or has expired. Please check your email for the correct link.</p>
+                    <Button
+                        onClick={() => router.push('/')}
+                        className="bg-black text-white hover:bg-gray-800 rounded-none px-8 py-3 uppercase tracking-widest text-xs"
+                    >
+                        Go Home
+                    </Button>
+                </div>
+            </div>
+        )
+    }
+
+    if (alreadySubmitted) {
+        return (
+            <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4 text-black">
+                <div className="w-full max-w-md text-center">
+                    <Image
+                        src="/logo.jpg"
+                        alt="Simon & Catherine"
+                        width={150}
+                        height={150}
+                        className="mx-auto mb-8"
+                    />
+                    <h1 className="font-serif text-3xl mb-4">Already Submitted</h1>
+                    <p className="text-gray-600 mb-8">You've already submitted your plus one details for {guestName}. If you need to make changes, please contact us directly.</p>
                     <Button
                         onClick={() => router.push('/')}
                         className="bg-black text-white hover:bg-gray-800 rounded-none px-8 py-3 uppercase tracking-widest text-xs"

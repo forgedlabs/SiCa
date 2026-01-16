@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { isRateLimited } from '@/lib/rateLimiter';
 
 /**
  * Submit plus one details via form
  */
 export async function POST(request: Request) {
+    const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
+    if (isRateLimited(ip)) {
+        return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+    }
     try {
         const body = await request.json();
         const { token, plusOneName, ceremony, dietary } = body;
@@ -26,6 +31,13 @@ export async function POST(request: Request) {
             }, { status: 404 });
         }
 
+        // Check if already submitted
+        if (guest.plusOneConfirmed) {
+            return NextResponse.json({
+                error: 'Plus one details already submitted'
+            }, { status: 400 });
+        }
+
         // Update guest with plus one details
         const updatedGuest = await prisma.guest.update({
             where: { id: guest.id },
@@ -40,6 +52,26 @@ export async function POST(request: Request) {
                     : guest.dietaryNotes
             }
         });
+
+        // Send confirmation email to main guest
+        if (guest.email) {
+            try {
+                const { sendPlusOneConfirmation } = await import('@/lib/email');
+                await sendPlusOneConfirmation(
+                    {
+                        firstName: guest.firstName,
+                        lastName: guest.lastName,
+                        email: guest.email
+                    },
+                    plusOneName.trim(),
+                    ceremony,
+                    dietary
+                );
+            } catch (emailError) {
+                console.error('[PLUS ONE] Failed to send confirmation email:', emailError);
+                // Don't fail the operation if email fails
+            }
+        }
 
         console.log('[PLUS ONE SUBMIT] Success:', {
             guestId: guest.id,

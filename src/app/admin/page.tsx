@@ -9,10 +9,21 @@ import Link from "next/link"
 import { Send } from "lucide-react"
 
 async function getStats() {
-    const totalGuests = await prisma.guest.count()
-    const attending = await prisma.guest.count({ where: { rsvpStatus: 'ACCEPTED' } })
-    const declined = await prisma.guest.count({ where: { rsvpStatus: 'DECLINED' } })
-    const pending = await prisma.guest.count({ where: { rsvpStatus: 'PENDING' } })
+    // Count main guests
+    const totalGuestRecords = await prisma.guest.count()
+    const attendingRecords = await prisma.guest.count({ where: { rsvpStatus: 'ACCEPTED' } })
+    const declinedRecords = await prisma.guest.count({ where: { rsvpStatus: 'DECLINED' } })
+    const pendingRecords = await prisma.guest.count({ where: { rsvpStatus: 'PENDING' } })
+
+    // Count confirmed plus ones
+    const totalPlusOnes = await prisma.guest.count({ where: { hasPlusOne: true, plusOneConfirmed: true } })
+    const attendingPlusOnes = await prisma.guest.count({ where: { rsvpStatus: 'ACCEPTED', hasPlusOne: true, plusOneConfirmed: true } })
+
+    // Total people = main guests + confirmed plus ones
+    const totalGuests = totalGuestRecords + totalPlusOnes
+    const attending = attendingRecords + attendingPlusOnes
+    const declined = declinedRecords
+    const pending = pendingRecords
 
     return { totalGuests, attending, declined, pending }
 }

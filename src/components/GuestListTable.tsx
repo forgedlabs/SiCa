@@ -77,7 +77,15 @@ export function GuestListTable({ initialGuests }: { initialGuests: Guest[] }) {
                                     <TableCell className="p-4 font-serif text-lg">
                                         {guest.firstName} {guest.lastName}
                                         {guest.hasPlusOne && (
-                                            <span className="ml-2 inline-flex items-center px-2 py-0.5 text-xs font-medium uppercase tracking-wider text-purple-600 bg-purple-50 rounded">+1</span>
+                                            <span className="ml-2 inline-flex items-center relative group">
+                                                <span className="px-2 py-0.5 text-xs font-medium uppercase tracking-wider text-purple-600 bg-purple-50 rounded cursor-help">
+                                                    +1
+                                                </span>
+                                                <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 text-xs text-white bg-gray-900 rounded whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity pointer-events-none z-50">
+                                                    {guest.plusOneName ? `Plus One: ${guest.plusOneName}` : 'Plus One invited'}
+                                                    <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-4 border-transparent border-t-gray-900"></span>
+                                                </span>
+                                            </span>
                                         )}
                                     </TableCell>
                                     <TableCell className="p-4 text-gray-600">{guest.email}</TableCell>

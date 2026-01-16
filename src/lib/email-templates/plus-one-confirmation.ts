@@ -1,0 +1,123 @@
+import { EMAIL_LOGO_BASE64 } from './logo';
+
+interface PlusOneConfirmationData {
+    guestFirstName: string;
+    guestLastName: string;
+    plusOneName: string;
+    ceremonyPreference?: string;
+    dietaryNotes?: string;
+}
+
+export function generatePlusOneConfirmationEmail(data: PlusOneConfirmationData): string {
+    const { guestFirstName, guestLastName, plusOneName, ceremonyPreference, dietaryNotes } = data;
+
+    return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plus One Confirmed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; background-color: #ffffff; color: #000000;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #ffffff;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table role="presentation" style="max-width: 600px; width: 100%; border-collapse: collapse; background-color: #ffffff;">
+          
+          <!-- Logo & Header -->
+          <tr>
+            <td style="padding: 40px 40px 32px 40px; text-align: center; border-bottom: 1px solid #000000;">
+              <img src="https://i.imgur.com/HIuEHCC.jpeg" alt="SICA" style="width: 120px; height: auto; margin-bottom: 24px;" />
+              <p style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 36px; font-weight: 400; color: #000000; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.2;">SIMON</p>
+              <p style="margin: 8px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; font-weight: 400; color: #000000; font-style: italic;">&amp;</p>
+              <p style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 36px; font-weight: 400; color: #000000; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.2;">CATHERINE</p>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding: 48px 40px;">
+              <h2 style="margin: 0 0 32px 0; font-family: Georgia, serif; font-size: 24px; font-weight: 400; color: #000000; letter-spacing: 0.05em;">PLUS ONE CONFIRMED</h2>
+              
+              <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">Dear ${guestFirstName} ${guestLastName},</p>
+              
+              <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.8; color: #000000;">Thank you for providing your plus one details!</p>
+              
+              <p style="margin: 0 0 32px 0; font-size: 15px; line-height: 1.8; color: #000000;">We're delighted that <strong>${plusOneName}</strong> will be joining you at our celebration on 30 May 2026.</p>
+
+              <!-- Plus One Details -->
+              <div style="margin: 0 0 24px 0; padding: 24px; background-color: #f5f5f5; border-left: 2px solid #000000;">
+                <p style="margin: 0 0 8px 0; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #666666; font-weight: 500;">Plus One</p>
+                <p style="margin: 0; font-size: 15px; color: #000000;">${plusOneName}</p>
+              </div>
+
+              ${ceremonyPreference ? `
+              <div style="margin: 0 0 24px 0; padding: 24px; background-color: #f5f5f5; border-left: 2px solid #000000;">
+                <p style="margin: 0 0 8px 0; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #666666; font-weight: 500;">Ceremony Attendance</p>
+                <p style="margin: 0; font-size: 15px; color: #000000;">${ceremonyPreference === 'both' ? 'Both Ceremonies' : ceremonyPreference === 'traditional' ? 'Traditional Ceremony Only' : 'Ceremonial Exchange & Reception Only'}</p>
+              </div>
+              ` : ''}
+
+              ${dietaryNotes ? `
+              <div style="margin: 0 0 32px 0; padding: 24px; background-color: #f5f5f5; border-left: 2px solid #000000;">
+                <p style="margin: 0 0 8px 0; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #666666; font-weight: 500;">Dietary Notes</p>
+                <p style="margin: 0; font-size: 15px; color: #000000;">${dietaryNotes}</p>
+              </div>
+              ` : ''}
+
+              <!-- Event Details -->
+              <div style="margin: 32px 0; padding-top: 32px; border-top: 1px solid #e0e0e0;">
+                <p style="margin: 0 0 20px 0; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #666666; font-weight: 500;">Event Details</p>
+                
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #f0f0f0;">
+                      <p style="margin: 0; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #666666;">Date</p>
+                    </td>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #f0f0f0; text-align: right;">
+                      <p style="margin: 0; font-size: 14px; color: #000000;">May 30, 2026</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #f0f0f0;">
+                      <p style="margin: 0; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #666666;">Location</p>
+                    </td>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #f0f0f0; text-align: right;">
+                      <p style="margin: 0; font-size: 14px; color: #000000;">Amsterdam, NL</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0;">
+                      <p style="margin: 0; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #666666;">Time</p>
+                    </td>
+                    <td style="padding: 12px 0; text-align: right;">
+                      <p style="margin: 0; font-size: 14px; color: #000000;">See full schedule</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <p style="margin: 40px 0 0 0; font-size: 15px; line-height: 1.8; color: #000000;">We can't wait to celebrate with you both. If you need to make any changes, feel free to reach out anytime.</p>
+              
+              <p style="margin: 24px 0 0 0; font-size: 15px; color: #000000;">With love,<br>Simon & Catherine</p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px 40px; text-align: center; border-top: 1px solid #e0e0e0; background-color: #fafafa;">
+              <p style="margin: 0 0 8px 0; font-size: 12px; color: #666666;">Questions? Please reach out to us.</p>
+              <p style="margin: 0; font-size: 11px; color: #999999; letter-spacing: 0.05em;">© 2026 SIMON & CATHERINE</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+}

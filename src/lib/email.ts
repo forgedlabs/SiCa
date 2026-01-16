@@ -4,6 +4,7 @@ import { generateRsvpDeclineEmail } from './email-templates/rsvp-decline';
 import { generateUpdateEmail } from './email-templates/update-notification';
 import { generateReminderEmail } from './email-templates/reminder';
 import { generatePlusOneFollowupEmail } from './email-templates/plus-one-followup';
+import { generatePlusOneConfirmationEmail } from './email-templates/plus-one-confirmation';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -75,6 +76,49 @@ export async function sendRsvpConfirmation(
         return { success: true, messageId: data?.id };
     } catch (error) {
         console.error('Error sending RSVP confirmation:', error);
+        return {
+            success: false,
+            error: error instanceof Error ? error.message : 'Unknown error',
+        };
+    }
+}
+
+/**
+ * Send plus one confirmation email to main guest
+ */
+export async function sendPlusOneConfirmation(
+    guest: { firstName: string; lastName: string; email: string },
+    plusOneName: string,
+    ceremonyPreference?: string,
+    dietaryNotes?: string
+): Promise<EmailResult> {
+    try {
+        const htmlContent = generatePlusOneConfirmationEmail({
+            guestFirstName: guest.firstName,
+            guestLastName: guest.lastName,
+            plusOneName,
+            ceremonyPreference,
+            dietaryNotes
+        });
+
+        const { data, error } = await resend.emails.send({
+            from: `${FROM_NAME} <${FROM_EMAIL}>`,
+            to: guest.email,
+            subject: 'Plus One Confirmed - Simon & Catherine Wedding',
+            html: htmlContent,
+            headers: {
+                'List-Unsubscribe': '<mailto:noreply@sicalovestory.com?subject=unsubscribe>',
+            },
+        });
+
+        if (error) {
+            console.error('Resend error:', error);
+            return { success: false, error: error.message };
+        }
+
+        return { success: true, messageId: data?.id };
+    } catch (error) {
+        console.error('Error sending plus one confirmation:', error);
         return {
             success: false,
             error: error instanceof Error ? error.message : 'Unknown error',
@@ -239,3 +283,38 @@ export async function sendPlusOneFollowup(
         };
     }
 }
+
+/**
+ * Generate email preview HTML without sending
+ * Used for preview functionality in admin dashboard
+ */
+export function generateEmailPreview(params: {
+    emailType: 'update' | 'reminder';
+    subject: string;
+    message: string;
+}): { html: string; subject: string } {
+    const { emailType, subject, message } = params;
+
+    let html: string;
+
+    if (emailType === 'update') {
+        html = generateUpdateEmail({
+            firstName: '[Guest First Name]',
+            lastName: '[Guest Last Name]',
+            subject,
+            message,
+        });
+    } else {
+        // reminder
+        html = generateReminderEmail({
+            firstName: '[Guest First Name]',
+            lastName: '[Guest Last Name]',
+            reminderType: 'custom',
+            customMessage: message,
+        });
+    }
+
+    return { html, subject };
+}
+
+

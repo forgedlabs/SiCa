@@ -36,6 +36,9 @@ export default function NotificationsPage() {
     const [result, setResult] = useState<any>(null)
     const [showConfirmDialog, setShowConfirmDialog] = useState(false)
     const [validationError, setValidationError] = useState<string | null>(null)
+    const [showPreview, setShowPreview] = useState(false)
+    const [previewHtml, setPreviewHtml] = useState('')
+    const [previewing, setPreviewing] = useState(false)
 
     // Fetch available locations on mount
     useEffect(() => {
@@ -92,6 +95,46 @@ export default function NotificationsPage() {
 
         fetchGuestCount()
     }, [recipientFilter])
+
+    const handlePreview = async () => {
+        // Validate inputs
+        if (emailType === 'update' && (!subject || !message)) {
+            setValidationError('Please enter both subject and message')
+            return
+        }
+        if (emailType === 'reminder' && !message) {
+            setValidationError('Please enter a message')
+            return
+        }
+
+        setPreviewing(true)
+        setValidationError(null)
+
+        try {
+            const res = await fetch('/api/admin/preview-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    emailType,
+                    subject: emailType === 'update' ? subject : `Wedding Reminder - Simon & Catherine`,
+                    message,
+                }),
+            })
+
+            if (!res.ok) {
+                throw new Error('Failed to generate preview')
+            }
+
+            const { html } = await res.json()
+            setPreviewHtml(html)
+            setShowPreview(true)
+        } catch (error) {
+            console.error('Preview error:', error)
+            setValidationError('Failed to generate preview')
+        } finally {
+            setPreviewing(false)
+        }
+    }
 
     const handleSend = async () => {
         // Validate inputs
@@ -351,8 +394,18 @@ export default function NotificationsPage() {
                         </div>
                     )}
 
-                    {/* Send Button */}
-                    <div className="flex justify-end pt-8 border-t border-gray-200">
+                    {/* Send and Preview Buttons */}
+                    <div className="flex justify-end gap-3 pt-8 border-t border-gray-200">
+                        <Button
+                            onClick={handlePreview}
+                            disabled={previewing || guestCount === 0}
+                            variant="outline"
+                            className="border-black px-8 py-6 hover:bg-gray-100 disabled:bg-gray-100 uppercase tracking-widest text-xs rounded-none"
+                        >
+                            {previewing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                            <Mail className="mr-2 h-4 w-4" />
+                            Preview Email
+                        </Button>
                         <Button
                             onClick={handleSend}
                             disabled={sending || guestCount === 0}
@@ -365,6 +418,45 @@ export default function NotificationsPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Preview Dialog */}
+            <Dialog open={showPreview} onOpenChange={setShowPreview}>
+                <DialogContent className="max-w-4xl max-h-[90vh] border-2 border-black rounded-none p-0">
+                    <DialogHeader className="p-6 pb-4 border-b border-gray-200">
+                        <DialogTitle className="uppercase tracking-widest text-sm">Email Preview</DialogTitle>
+                        <DialogDescription className="text-sm text-gray-600">
+                            This is how the email will appear to recipients. Guest names will be personalized for each recipient.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="overflow-auto max-h-[70vh] bg-gray-50">
+                        <iframe
+                            srcDoc={previewHtml}
+                            className="w-full min-h-[500px] bg-white"
+                            title="Email Preview"
+                            sandbox="allow-same-origin"
+                        />
+                    </div>
+                    <DialogFooter className="p-6 pt-4 border-t border-gray-200">
+                        <Button
+                            onClick={() => setShowPreview(false)}
+                            variant="outline"
+                            className="border-black rounded-none uppercase tracking-widest text-xs py-5 px-8"
+                        >
+                            Close Preview
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                setShowPreview(false)
+                                handleSend()
+                            }}
+                            className="bg-black text-white rounded-none uppercase tracking-widest text-xs py-5 px-8 hover:bg-gray-800"
+                        >
+                            <Send className="mr-2 h-4 w-4" />
+                            Send Email
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
 
             {/* Confirmation Dialog */}
             <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
